@@ -1,0 +1,6 @@
+os: osx
+language: swift 
+osx_image: xcode10
+xcode_workspace: PSS.xcworkspace 
+xcode_scheme: PSS
+xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone 8 
