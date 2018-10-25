@@ -1,11 +1,19 @@
-//
 //  GalleryMode.swift
-//  photosApp2: https://github.com/Akhilendra/photosAppiOS
-//
-//  Created by Muskan on 10/4/17.
-//  Copyright © 2017 akhil. All rights reserved.
+//  Source used: https://github.com/Akhilendra/photosAppiOS
 
-//  Modified by CMPT275 Group 3
+//  Description: Image Preview in Gallery. The following Swift file handles the following features: Share / Delete / Backup
+
+//  CMPT 275 Group 3 - SavePark
+//  Fall 2018
+
+//  File Created By: Curtis Cheung
+//  File Modified By: Curtis Cheung
+
+//  All changes are marked with "CMPT275" (no quotes)
+//  Changes:
+//  10/14/2018 - Added Google Firebase Cloud Backup implementation, Share option for each Photo
+//  10/15/2018 - Added Delete Functionality (currently does not delete the correct photo)
+//  10/25/2018 - Code Cleanup (comments)
 
 import UIKit
 import Photos
@@ -17,10 +25,8 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        self.title = "Photos"
-        
+        // Setup Collection View Grid for Gallery
         let layout = UICollectionViewFlowLayout()
         
         myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
@@ -32,6 +38,7 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         myCollectionView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
         
+        // Obtain pictures from device storage
         grabPhotos()
     }
     
@@ -57,7 +64,7 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width
         if DeviceInfo.Orientation.isPortrait {
-            // CMPT275 Modified size (default:4 override: 2)
+            // CMPT275 - Modified grid size (default:4 override: 2)
             return CGSize(width: width/2 - 1, height: width/2 - 1)
         } else {
             return CGSize(width: width/6 - 1, height: width/6 - 1)
@@ -84,6 +91,7 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         DispatchQueue.global(qos: .background).async {
             print("This is run on the background queue")
+            // Configure fetch options (Quality, Fetch order)
             let imgManager=PHImageManager.default()
             
             let requestOptions=PHImageRequestOptions()
@@ -96,6 +104,7 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
             print(fetchResult)
             print(fetchResult.count)
+            // Store fetched photos into an array
             if fetchResult.count > 0 {
                 for i in 0..<fetchResult.count{
                     imgManager.requestImage(for: fetchResult.object(at: i) as PHAsset, targetSize: CGSize(width:500, height: 500),contentMode: .aspectFill, options: requestOptions, resultHandler: { (image, error) in
@@ -103,6 +112,8 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                     })
                 }
             } else {
+                // Error if no photos are found
+                // TODO: Add Alert Dialog
                 print("You got no photos.")
             }
             print("imageArray count: \(self.imageArray.count)")
@@ -122,7 +133,7 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
 
 }
 
-
+// Function to display each photo in a Cell
 class PhotoItemCell: UICollectionViewCell {
     
     var img = UIImageView()

@@ -1,3 +1,6 @@
+//  Description: Sandbox to Test OpenCV functionality
+//  Will be removed in Release
+
 import Photos
 
 class View2: UIViewController {

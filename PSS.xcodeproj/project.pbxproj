@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A5C6C461CD6DE6A5BACE3EEC /* Pods_PSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 111C82BEE86BDAC19FAFDC86 /* Pods_PSS.framework */; };
 		AF7DD4D31ED3AA28005C880E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7DD4D21ED3AA28005C880E /* AppDelegate.swift */; };
 		AF7DD4D51ED3AA28005C880E /* PhotoMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7DD4D41ED3AA28005C880E /* PhotoMode.swift */; };
 		AF7DD4D81ED3AA28005C880E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF7DD4D61ED3AA28005C880E /* Main.storyboard */; };
@@ -32,7 +31,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		111C82BEE86BDAC19FAFDC86 /* Pods_PSS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PSS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA89D9DAE16A2462BCDDF3C /* Pods-PSS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PSS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PSS/Pods-PSS.debug.xcconfig"; sourceTree = "<group>"; };
 		A179070D872019A03403C789 /* Pods-PSS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PSS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PSS/Pods-PSS.release.xcconfig"; sourceTree = "<group>"; };
 		AF7DD4CF1ED3AA28005C880E /* PSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,7 +55,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5C6C461CD6DE6A5BACE3EEC /* Pods_PSS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,7 +71,6 @@
 		2EC5AF0127BCDA3BEB012E20 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				111C82BEE86BDAC19FAFDC86 /* Pods_PSS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

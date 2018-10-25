@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CameraController.swift"
-            timestampString = "561619393.783635"
+            timestampString = "562188470.632439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "captureImage(completion:)"
             landmarkType = "7">
          </BreakpointContent>

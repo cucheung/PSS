@@ -1,11 +1,18 @@
-//
 //  ViewController.swift
-//  AV Foundation: https://github.com/appcoda/FullScreenCamera
-//
-//  Created by Pranjal Satija on 5/22/17.
-//  Copyright © 2017 Pranjal Satija. All rights reserved.
-//
-//  Modified by CMPT275 Group 3
+//  Source used: https://github.com/appcoda/FullScreenCamera
+
+//  Description: Camera Controller for Photo Mode
+
+//  CMPT 275 Group 3 - SavePark
+//  Fall 2018
+
+//  File Created By: Curtis Cheung
+//  File Modified By: Curtis Cheung
+
+//  All changes are marked with "CMPT275" (no quotes)
+//  Changes:
+//  10/19/2018 - Added HVAA Button placeholder
+//  10/25/2018 - Code Cleanup (comments)
 
 import UIKit
 import Photos
@@ -69,7 +76,7 @@ extension ViewController {
         }
     }
     
-    // CMPT275
+    // CMPT275 - HVAA Feature
     @IBAction func HVAA_toggle(_ sender: UIButton) {
         NSLog("Works")
     }
