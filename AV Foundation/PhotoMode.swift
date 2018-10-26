@@ -14,9 +14,13 @@
 //  10/19/2018 - Added HVAA Button placeholder
 //  10/25/2018 - Code Cleanup (comments), Added View transition to ProcessPhotos
 //  10/25/2018 - Added Photo Instruction Alert (Placeholder), Added Back button (in Storyboard)
+//  10/25/2018 - Added Alert Diaglog when Camera is not detected
 
 import UIKit
 import Photos
+import CoreMotion
+
+var cameraDetected = true;
 
 class ViewController: UIViewController {
     
@@ -33,14 +37,27 @@ class ViewController: UIViewController {
     
     let cameraController = CameraController()
     
+    // CMPT275 - Alias for Core Motion Library (Accelerometer / Gyroscope)
+    let motion = CMMotionManager()
+    
     override var prefersStatusBarHidden: Bool { return true }
     
     // CMPT 275 - Photo Mode Instructions Alert
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let alertController = UIAlertController(title: "Instructions", message: "Photo Mode Instructions", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        present(alertController, animated: true, completion: nil)
+        if (cameraDetected == true)
+        {
+            let alertController = UIAlertController(title: "Instructions", message: "Photo Mode Instructions", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            present(alertController, animated: true, completion: nil)
+        }
+        else
+        {
+            let alertController = UIAlertController(title: "Error", message: "No Camera Detected", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            present(alertController, animated: true, completion: nil)
+        }
+
     }
     
 }
@@ -48,10 +65,13 @@ class ViewController: UIViewController {
 extension ViewController {
     override func viewDidLoad() {
         
+        
         func configureCameraController() {
             cameraController.prepare {(error) in
                 if let error = error {
                     print(error)
+                    cameraDetected = false;
+                    self.dismiss(animated: true)
                 }
                 try? self.cameraController.displayPreview(on: self.capturePreviewView)
             }
@@ -121,10 +141,11 @@ extension ViewController {
             }
             
         }
+        
         // CMPT275 - Present Process Photos View Controller after capturing photos
         let viewController = storyboard?.instantiateViewController(withIdentifier: "processphotos") as! UIViewController
         self.present(viewController, animated: true)
+        }
+
     }
-    
-}
 

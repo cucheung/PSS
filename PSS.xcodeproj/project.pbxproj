@@ -21,6 +21,7 @@
 		E0C7CC5021731C8500B88962 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C7CC4F21731C8400B88962 /* ImagePicker.swift */; };
 		E0D87F73217B09100029AF28 /* PSSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D87F72217B09100029AF28 /* PSSUITests.swift */; };
 		F4D077821EDC0A91001B0881 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D077811EDC0A91001B0881 /* CameraController.swift */; };
+		F71B75231838AF7DEFF4F7A4 /* Pods_PSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402E62AAEF701438A66B135D /* Pods_PSS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		2BA89D9DAE16A2462BCDDF3C /* Pods-PSS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PSS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PSS/Pods-PSS.debug.xcconfig"; sourceTree = "<group>"; };
+		402E62AAEF701438A66B135D /* Pods_PSS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PSS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A179070D872019A03403C789 /* Pods-PSS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PSS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PSS/Pods-PSS.release.xcconfig"; sourceTree = "<group>"; };
 		AF7DD4CF1ED3AA28005C880E /* PSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7DD4D21ED3AA28005C880E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0AE5BE52182EE76009E0B0D /* opencv2.framework in Frameworks */,
+				F71B75231838AF7DEFF4F7A4 /* Pods_PSS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				E0AE5BE42182EE76009E0B0D /* opencv2.framework */,
+				402E62AAEF701438A66B135D /* Pods_PSS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
