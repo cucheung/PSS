@@ -13,11 +13,10 @@
 //  Changes:
 //  10/19/2018 - Added HVAA Button placeholder
 //  10/25/2018 - Code Cleanup (comments), Added View transition to ProcessPhotos
+//  10/25/2018 - Added Photo Instruction Alert (Placeholder), Added Back button (in Storyboard)
 
 import UIKit
 import Photos
-
-var Complete = false;
 
 class ViewController: UIViewController {
     
@@ -36,11 +35,18 @@ class ViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool { return true }
     
+    // CMPT 275 - Photo Mode Instructions Alert
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let alertController = UIAlertController(title: "Instructions", message: "Photo Mode Instructions", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
 }
 
 extension ViewController {
     override func viewDidLoad() {
-
         
         func configureCameraController() {
             cameraController.prepare {(error) in
@@ -60,10 +66,8 @@ extension ViewController {
         
         styleCaptureButton()
         configureCameraController()
-
-        
+    
     }
-
 }
 
 extension ViewController {

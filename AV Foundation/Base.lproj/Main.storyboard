@@ -53,6 +53,17 @@
                                             <action selector="HVAA_toggle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P3I-aG-Djn"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ar-wD-sPC">
+                                        <rect key="frame" x="4" y="0.0" width="63" height="47"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="5Bf-qr-bEQ" kind="show" id="kJW-3h-wUx"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -290,4 +301,7 @@
         <image name="Flash Off Icon" width="24" height="24"/>
         <image name="Rear Camera Icon" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="kJW-3h-wUx"/>
+    </inferredMetricsTieBreakers>
 </document>

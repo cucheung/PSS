@@ -14,6 +14,7 @@
 //  10/25/2018 - Added UI Layout, deletePhoto functionality
 //  10/25/2018 - Implemented OpenCV Functionality
 //  10/25/2018 - Changed colour of buttons to correspond to Save/Delete states
+//  10/25/2018 - Added Photo Instruction Alert (Placeholder)
 
 import Photos
 
@@ -105,9 +106,16 @@ class ProcessPhotos: UIViewController {
         Button_4.onTintColor = UIColor.red
         Button_5.onTintColor = UIColor.red
         Button_6.onTintColor = UIColor.red
-        
-        
+
         Save.addTarget(self, action: #selector(savePhotos), for: .touchUpInside)
+    }
+    
+    // CMPT 275 - Photo Mode Instructions Alert
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let alertController = UIAlertController(title: "Instructions", message: "Photo Mode 2 Instructions", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
     
     // CMPT275 - Function to Delete selected photos

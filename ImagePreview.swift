@@ -15,6 +15,7 @@
 //  10/15/2018 - Removed Slide feature to slide between photos in Preview Mode
 //  10/25/2018 - Code Cleanup (comments)
 //  10/25/2018 - Cleaned up ImagePreview UI, fixed Delete Photo functionality, Added Back Button
+
 import UIKit
 import FirebaseStorage // CMPT 275 - Import Firebase library
 import Foundation
