@@ -195,6 +195,7 @@ extension CameraController {
         captureSession.commitConfiguration()
     }
     
+    
     // Capture Photo and Store Photo to device
     func captureImage(completion: @escaping (UIImage?, Error?) -> Void) {
         guard let captureSession = captureSession, captureSession.isRunning else { completion(nil, CameraControllerError.captureSessionIsMissing); return }
@@ -207,6 +208,7 @@ extension CameraController {
             usleep(500000)
             self.photoCaptureCompletionBlock = completion
         }
+    
     }
 
 }

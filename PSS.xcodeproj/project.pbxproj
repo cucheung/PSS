@@ -12,6 +12,7 @@
 		AF7DD4D81ED3AA28005C880E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF7DD4D61ED3AA28005C880E /* Main.storyboard */; };
 		AF7DD4DA1ED3AA28005C880E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7DD4D91ED3AA28005C880E /* Assets.xcassets */; };
 		AF7DD4DD1ED3AA28005C880E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF7DD4DB1ED3AA28005C880E /* LaunchScreen.storyboard */; };
+		E0490CBF2182598200A55957 /* ProcessPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0490CBE2182598200A55957 /* ProcessPhotos.swift */; };
 		E088185321743DBD001AAE4F /* GalleryMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E088185021743DBD001AAE4F /* GalleryMode.swift */; };
 		E088185521743DBD001AAE4F /* ImagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E088185221743DBD001AAE4F /* ImagePreview.swift */; };
 		E0A3A0E72174161200774E32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0A3A0E62174161100774E32 /* GoogleService-Info.plist */; };
@@ -40,6 +41,7 @@
 		AF7DD4D91ED3AA28005C880E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "AV Foundation/Assets.xcassets"; sourceTree = "<group>"; };
 		AF7DD4DC1ED3AA28005C880E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF7DD4DE1ED3AA28005C880E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0490CBE2182598200A55957 /* ProcessPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessPhotos.swift; sourceTree = "<group>"; };
 		E088185021743DBD001AAE4F /* GalleryMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryMode.swift; sourceTree = "<group>"; };
 		E088185221743DBD001AAE4F /* ImagePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreview.swift; sourceTree = "<group>"; };
 		E0A3A0E62174161100774E32 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		AF7DD4C61ED3AA28005C880E = {
 			isa = PBXGroup;
 			children = (
+				E0490CBE2182598200A55957 /* ProcessPhotos.swift */,
 				E088185021743DBD001AAE4F /* GalleryMode.swift */,
 				E088185221743DBD001AAE4F /* ImagePreview.swift */,
 				AF7DD4D41ED3AA28005C880E /* PhotoMode.swift */,
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E088185321743DBD001AAE4F /* GalleryMode.swift in Sources */,
+				E0490CBF2182598200A55957 /* ProcessPhotos.swift in Sources */,
 				F4D077821EDC0A91001B0881 /* CameraController.swift in Sources */,
 				AF7DD4D51ED3AA28005C880E /* PhotoMode.swift in Sources */,
 				AF7DD4D31ED3AA28005C880E /* AppDelegate.swift in Sources */,
