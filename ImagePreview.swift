@@ -1,5 +1,5 @@
 //  ImagePreviewVC.swift
-//  Sources used: https://github.com/Akhilendra/photosAppiOS, https://stackoverflow.com/a/49192691/10498067 (Share button)
+//  Sources used: https://github.com/Akhilendra/photosAppiOS, https://stackoverflow.com/a/49192691/10498067 (Share button), https://stackoverflow.com/questions/29466866/how-to-delete-the-last-photo-in-swift-ios8 (Modified to Delete specific Photos)
 
 //  Description: Image Preview in Gallery. The following Swift file handles the following features: Share / Delete / Backup
 

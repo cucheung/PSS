@@ -1,5 +1,5 @@
 //  ProcessPhotos.swift
-//  Sources used: https://stackoverflow.com/questions/28259961/swift-how-to-get-last-taken-3-photos-from-photo-library (Fetch Photo)
+//  Sources used: https://stackoverflow.com/questions/28259961/swift-how-to-get-last-taken-3-photos-from-photo-library (Fetch Photo), https://stackoverflow.com/questions/29466866/how-to-delete-the-last-photo-in-swift-ios8 (Modified to Delete specific Photos)
 
 //  Description: This View is displayed after photos are captured
 //  Performs the Following Actions: Process Photo in OpenCV / Display processed photos / Delete selected pictures
@@ -12,14 +12,21 @@
 
 //  Changes:
 //  10/25/2018 - Added UI Layout, deletePhoto functionality
+//  10/25/2018 - Implemented OpenCV Functionality
+//  10/25/2018 - Changed colour of buttons to correspond to Save/Delete states
 
 import Photos
 
 class ProcessPhotos: UIViewController {
     
+    // Array used to store the last 6 images captured
     var images:[UIImage] = []
-    var selectedImg:[Int] = []
+    // Array to store sorted images for preview
+    var sorted_images:[UIImage] = []
+    // Array to hold blur values for each photo
+    var result:[Double] = []
     
+    // UI Declarations (Image Views / Buttons)
     @IBOutlet var Image_1: UIImageView!
     @IBOutlet var Image_2: UIImageView!
     @IBOutlet var Image_3: UIImageView!
@@ -36,15 +43,37 @@ class ProcessPhotos: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Fetch last 6 photos to images[]
         fetchPhotos()
         
+        // Process Photos
+        let result_test = OpenCVWrapper()
+        
+        // Calculate magnitude of blur using Laplace Filter and OpenCV (higher the number, the clearer the photo)
+        result.append(result_test.isImageBlurry(images[0]))
+        result.append(result_test.isImageBlurry(images[1]))
+        result.append(result_test.isImageBlurry(images[2]))
+        result.append(result_test.isImageBlurry(images[3]))
+        result.append(result_test.isImageBlurry(images[4]))
+        result.append(result_test.isImageBlurry(images[5]))
+    
+        // Order Photos by Clarity (Most Clear -> Least Clear)
+        for _ in 0...5
+        {
+            let max = result.max()
+            let location = result.index(of:max!)
+            sorted_images.append(images[location!])
+            result.remove(at: location!)
+            images.remove(at: location!)
+        }
+        
         // Display captured images
-        Image_1.image = images[0]
-        Image_2.image = images[1]
-        Image_3.image = images[2]
-        Image_4.image = images[3]
-        Image_5.image = images[4]
-        Image_6.image = images[5]
+        Image_1.image = sorted_images[0]
+        Image_2.image = sorted_images[1]
+        Image_3.image = sorted_images[2]
+        Image_4.image = sorted_images[3]
+        Image_5.image = sorted_images[4]
+        Image_6.image = sorted_images[5]
         
         // Enlarge Button by 1.25x for ease of use
         Button_1.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
@@ -61,6 +90,22 @@ class ProcessPhotos: UIViewController {
         Button_4.setOn(false, animated: true)
         Button_5.setOn(false, animated: true)
         Button_6.setOn(false, animated: true)
+        
+        // Set Button Colours (Green = Keep / Red = Delete)
+        Button_1.tintColor = UIColor.green
+        Button_2.tintColor = UIColor.green
+        Button_3.tintColor = UIColor.green
+        Button_4.tintColor = UIColor.green
+        Button_5.tintColor = UIColor.green
+        Button_6.tintColor = UIColor.green
+        
+        Button_1.onTintColor = UIColor.red
+        Button_2.onTintColor = UIColor.red
+        Button_3.onTintColor = UIColor.red
+        Button_4.onTintColor = UIColor.red
+        Button_5.onTintColor = UIColor.red
+        Button_6.onTintColor = UIColor.red
+        
         
         Save.addTarget(self, action: #selector(savePhotos), for: .touchUpInside)
     }
@@ -100,6 +145,8 @@ class ProcessPhotos: UIViewController {
                 deleteImage(index: index)
             }
         }
+        // Sleep for two seconds to wait for initial delete prompt to appear
+        sleep(2)
         // Return back to Viewfinder
         dismiss(animated: true)
         
