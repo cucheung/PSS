@@ -14,6 +14,7 @@
 //  10/14/2018 - Added Google Firebase Cloud Backup implementation, Share option for each Photo
 //  10/15/2018 - Added Delete Functionality (currently does not delete the correct photo)
 //  10/25/2018 - Code Cleanup (comments)
+//  10/25/2018 - Added Back Button
 
 import UIKit
 import Photos
@@ -26,6 +27,20 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // CMPT275 - Back button
+        let backButton: UIButton = {
+            let button = UIButton(type: .system)
+            button.backgroundColor = UIColor.white
+            let xPostion:CGFloat = 10
+            let yPostion:CGFloat = 30
+            let buttonWidth:CGFloat = 350
+            let buttonHeight:CGFloat = 45
+            button.frame = CGRect(x:xPostion, y:yPostion, width:buttonWidth, height:buttonHeight)
+            button.setTitle("Back", for: .normal)
+            button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+            return button
+        }()
+        
         // Setup Collection View Grid for Gallery
         let layout = UICollectionViewFlowLayout()
         
@@ -35,11 +50,13 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         myCollectionView.register(PhotoItemCell.self, forCellWithReuseIdentifier: "Cell")
         myCollectionView.backgroundColor=UIColor.white
         self.view.addSubview(myCollectionView)
+        self.view.addSubview(backButton)
         
         myCollectionView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
         
         // Obtain pictures from device storage
         grabPhotos()
+        
     }
     
     //MARK: CollectionView
@@ -84,6 +101,10 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         return 1.0
     }
     
+    // CMPT275 - Back Button
+    @objc func dismissView() {
+        dismiss(animated: true)
+    }
     
     //MARK: grab photos
     func grabPhotos(){

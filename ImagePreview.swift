@@ -14,7 +14,7 @@
 //  10/10/2018 - Changed Grid Tile Size for easier access
 //  10/15/2018 - Removed Slide feature to slide between photos in Preview Mode
 //  10/25/2018 - Code Cleanup (comments)
-
+//  10/25/2018 - Cleaned up ImagePreview UI, fixed Delete Photo functionality, Added Back Button
 import UIKit
 import FirebaseStorage // CMPT 275 - Import Firebase library
 import Foundation
@@ -29,12 +29,26 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     var updatedOffset = IndexPath()
     var imgIndex: UIImage!
     
+    // CMPT275 - Back button
+    let backButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = UIColor.white
+        let xPostion:CGFloat = 10
+        let yPostion:CGFloat = 30
+        let buttonWidth:CGFloat = 350
+        let buttonHeight:CGFloat = 45
+        button.frame = CGRect(x:xPostion, y:yPostion, width:buttonWidth, height:buttonHeight)
+        button.setTitle("Back", for: .normal)
+        button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        return button
+    }()
+    
     // CMPT275 - Button to Backup Photo to Google Firebase (backed up to /backup)
     let uploadButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = UIColor.gray
-        let xPostion:CGFloat = 50
-        let yPostion:CGFloat = 100
+        button.backgroundColor = UIColor.white
+        let xPostion:CGFloat = 20
+        let yPostion:CGFloat = 80
         let buttonWidth:CGFloat = 150
         let buttonHeight:CGFloat = 45
         button.frame = CGRect(x:xPostion, y:yPostion, width:buttonWidth, height:buttonHeight)
@@ -46,9 +60,9 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     // CMPT275 - Button to Share Photo
     let shareButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = UIColor.gray
+        button.backgroundColor = UIColor.white
         let xPostion:CGFloat = 200
-        let yPostion:CGFloat = 200
+        let yPostion:CGFloat = 80
         let buttonWidth:CGFloat = 150
         let buttonHeight:CGFloat = 45
         button.frame = CGRect(x:xPostion, y:yPostion, width:buttonWidth, height:buttonHeight)
@@ -60,10 +74,10 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     // CMPT275 - Button to delete Photo
     let deleteButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = UIColor.gray
-        let xPostion:CGFloat = 200
-        let yPostion:CGFloat = 100
-        let buttonWidth:CGFloat = 150
+        button.backgroundColor = UIColor.white
+        let xPostion:CGFloat = 10
+        let yPostion:CGFloat = 600
+        let buttonWidth:CGFloat = 350
         let buttonHeight:CGFloat = 45
         button.frame = CGRect(x:xPostion, y:yPostion, width:buttonWidth, height:buttonHeight)
         button.setTitle("Delete", for: .normal)
@@ -101,6 +115,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.view.addSubview(uploadButton)
         self.view.addSubview(shareButton)
         self.view.addSubview(deleteButton)
+        self.view.addSubview(backButton)
         
         myCollectionView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
     }
@@ -144,6 +159,12 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
             self.myCollectionView.setContentOffset(newOffset, animated: false)
         }, completion: nil)
     }
+    
+    // CMPT275 - Back Button
+    @objc func dismissView() {
+        dismiss(animated: true)
+    }
+    
     // CMPT275 - Upload Photo Function
     @objc func uploadPhoto() {
         // Obtain unique ID for image
@@ -185,7 +206,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         
         // Find corresponding photo to delete via index
-        let rowNumber : Int = passedContentOffset.row
+        let rowNumber : Int = passedContentOffset.section
         if (fetchResult.object(at: rowNumber) != nil) {
             var lastAsset: PHAsset = fetchResult.object(at: rowNumber) as! PHAsset
             let arrayToDelete = NSArray(object: lastAsset)
