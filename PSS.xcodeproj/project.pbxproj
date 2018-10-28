@@ -40,9 +40,9 @@
 		A179070D872019A03403C789 /* Pods-PSS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PSS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PSS/Pods-PSS.release.xcconfig"; sourceTree = "<group>"; };
 		AF7DD4CF1ED3AA28005C880E /* PSS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PSS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7DD4D21ED3AA28005C880E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AF7DD4D41ED3AA28005C880E /* PhotoMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotoMode.swift; path = "AV Foundation/PhotoMode.swift"; sourceTree = "<group>"; };
+		AF7DD4D41ED3AA28005C880E /* PhotoMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMode.swift; sourceTree = "<group>"; };
 		AF7DD4D71ED3AA28005C880E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AF7DD4D91ED3AA28005C880E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "AV Foundation/Assets.xcassets"; sourceTree = "<group>"; };
+		AF7DD4D91ED3AA28005C880E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF7DD4DC1ED3AA28005C880E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF7DD4DE1ED3AA28005C880E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0490CBE2182598200A55957 /* ProcessPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessPhotos.swift; sourceTree = "<group>"; };
@@ -102,20 +102,13 @@
 		AF7DD4C61ED3AA28005C880E = {
 			isa = PBXGroup;
 			children = (
-				E0490CBE2182598200A55957 /* ProcessPhotos.swift */,
-				E088185021743DBD001AAE4F /* GalleryMode.swift */,
-				E088185221743DBD001AAE4F /* ImagePreview.swift */,
-				AF7DD4D41ED3AA28005C880E /* PhotoMode.swift */,
-				F4D077811EDC0A91001B0881 /* CameraController.swift */,
 				AF7DD4D61ED3AA28005C880E /* Main.storyboard */,
-				E0C7CC4F21731C8400B88962 /* ImagePicker.swift */,
+				AF7DD4DB1ED3AA28005C880E /* LaunchScreen.storyboard */,
 				E0A3A0E62174161100774E32 /* GoogleService-Info.plist */,
-				E0AE5BE72182EEA2009E0B0D /* OpenCVWrapper.h */,
-				E0AE5BE82182EEA2009E0B0D /* OpenCVWrapper.mm */,
-				E0AE5BE62182EEA1009E0B0D /* PSS-Bridging-Header.h */,
-				E0AE5BEA2182EF56009E0B0D /* PrefixHeader.pch */,
-				AF7DD4D91ED3AA28005C880E /* Assets.xcassets */,
-				AF7DD4D11ED3AA28005C880E /* AV Foundation */,
+				AF7DD4DE1ED3AA28005C880E /* Info.plist */,
+				E012253A218557180030B3C8 /* OpenCV */,
+				AF7DD4D11ED3AA28005C880E /* PhotoMode */,
+				E012253B218557570030B3C8 /* GalleryMode */,
 				E0D87F71217B09100029AF28 /* PSSUITests */,
 				AF7DD4D01ED3AA28005C880E /* Products */,
 				AF445464D5C41C47C39F6431 /* Pods */,
@@ -132,14 +125,37 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AF7DD4D11ED3AA28005C880E /* AV Foundation */ = {
+		AF7DD4D11ED3AA28005C880E /* PhotoMode */ = {
 			isa = PBXGroup;
 			children = (
+				AF7DD4D41ED3AA28005C880E /* PhotoMode.swift */,
+				F4D077811EDC0A91001B0881 /* CameraController.swift */,
+				E0490CBE2182598200A55957 /* ProcessPhotos.swift */,
+				AF7DD4D91ED3AA28005C880E /* Assets.xcassets */,
 				AF7DD4D21ED3AA28005C880E /* AppDelegate.swift */,
-				AF7DD4DB1ED3AA28005C880E /* LaunchScreen.storyboard */,
-				AF7DD4DE1ED3AA28005C880E /* Info.plist */,
 			);
-			path = "AV Foundation";
+			path = PhotoMode;
+			sourceTree = "<group>";
+		};
+		E012253A218557180030B3C8 /* OpenCV */ = {
+			isa = PBXGroup;
+			children = (
+				E0AE5BE62182EEA1009E0B0D /* PSS-Bridging-Header.h */,
+				E0AE5BEA2182EF56009E0B0D /* PrefixHeader.pch */,
+				E0AE5BE72182EEA2009E0B0D /* OpenCVWrapper.h */,
+				E0AE5BE82182EEA2009E0B0D /* OpenCVWrapper.mm */,
+			);
+			path = OpenCV;
+			sourceTree = "<group>";
+		};
+		E012253B218557570030B3C8 /* GalleryMode */ = {
+			isa = PBXGroup;
+			children = (
+				E088185021743DBD001AAE4F /* GalleryMode.swift */,
+				E088185221743DBD001AAE4F /* ImagePreview.swift */,
+				E0C7CC4F21731C8400B88962 /* ImagePicker.swift */,
+			);
+			path = GalleryMode;
 			sourceTree = "<group>";
 		};
 		E0D87F71217B09100029AF28 /* PSSUITests */ = {
@@ -347,7 +363,6 @@
 				AF7DD4D71ED3AA28005C880E /* Base */,
 			);
 			name = Main.storyboard;
-			path = "AV Foundation";
 			sourceTree = "<group>";
 		};
 		AF7DD4DB1ED3AA28005C880E /* LaunchScreen.storyboard */ = {
@@ -482,13 +497,13 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
-				INFOPLIST_FILE = "AV Foundation/Info.plist";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/OpenCV/PrefixHeader.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cmpt275.group3.pss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "PSS-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OpenCV/PSS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -507,13 +522,13 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
-				INFOPLIST_FILE = "AV Foundation/Info.plist";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/OpenCV/PrefixHeader.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cmpt275.group3.pss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "PSS-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OpenCV/PSS-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
