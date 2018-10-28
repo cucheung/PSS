@@ -125,6 +125,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImagePreviewFullViewCell
+        // CMPT 275 - Preview image
         let rowNumber : Int = imgOffset
         cell.imgView.image=imgArray[rowNumber]
         imgIndex = imgArray[rowNumber];

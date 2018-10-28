@@ -133,6 +133,7 @@ extension ViewController {
     }
     
     @IBAction func captureImage(_ sender: UIButton) {
+        // CMPT 275 - Disable button after single button
         (sender as? UIButton)?.isEnabled = false
         cameraController.captureImage {(image, error) in
             guard let image = image else {
