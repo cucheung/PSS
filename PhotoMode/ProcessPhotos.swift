@@ -15,6 +15,7 @@
 //  10/25/2018 - Implemented OpenCV Functionality
 //  10/25/2018 - Changed colour of buttons to correspond to Save/Delete states
 //  10/25/2018 - Added Photo Instruction Alert (Placeholder)
+//  10/27/2019 - Fixed Photo Display issue (was not displaying the captured photos but rather the previous 6 photos)
 
 import Photos
 
@@ -44,38 +45,6 @@ class ProcessPhotos: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Fetch last 6 photos to images[]
-        fetchPhotos()
-        
-        // Process Photos
-        let result_test = OpenCVWrapper()
-        
-        // Calculate magnitude of blur using Laplace Filter and OpenCV (higher the number, the clearer the photo)
-        result.append(result_test.isImageBlurry(images[0]))
-        result.append(result_test.isImageBlurry(images[1]))
-        result.append(result_test.isImageBlurry(images[2]))
-        result.append(result_test.isImageBlurry(images[3]))
-        result.append(result_test.isImageBlurry(images[4]))
-        result.append(result_test.isImageBlurry(images[5]))
-    
-        // Order Photos by Clarity (Most Clear -> Least Clear)
-        for _ in 0...5
-        {
-            let max = result.max()
-            let location = result.index(of:max!)
-            sorted_images.append(images[location!])
-            result.remove(at: location!)
-            images.remove(at: location!)
-        }
-        
-        // Display captured images
-        Image_1.image = sorted_images[0]
-        Image_2.image = sorted_images[1]
-        Image_3.image = sorted_images[2]
-        Image_4.image = sorted_images[3]
-        Image_5.image = sorted_images[4]
-        Image_6.image = sorted_images[5]
-        
         // Enlarge Button by 1.25x for ease of use
         Button_1.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
         Button_2.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
@@ -106,16 +75,47 @@ class ProcessPhotos: UIViewController {
         Button_4.onTintColor = UIColor.red
         Button_5.onTintColor = UIColor.red
         Button_6.onTintColor = UIColor.red
-
+        
         Save.addTarget(self, action: #selector(savePhotos), for: .touchUpInside)
     }
     
     // CMPT 275 - Photo Mode Instructions Alert
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // Fetch last 6 photos to images[]
+        fetchPhotos()
+        // Process Photos
+        let result_test = OpenCVWrapper()
+        
+        // Calculate magnitude of blur using Laplace Filter and OpenCV (higher the number, the clearer the photo)
+        result.append(result_test.isImageBlurry(images[0]))
+        result.append(result_test.isImageBlurry(images[1]))
+        result.append(result_test.isImageBlurry(images[2]))
+        result.append(result_test.isImageBlurry(images[3]))
+        result.append(result_test.isImageBlurry(images[4]))
+        result.append(result_test.isImageBlurry(images[5]))
+        
+        // Order Photos by Clarity (Most Clear -> Least Clear)
+        for _ in 0...5
+        {
+            let max = result.max()
+            let location = result.index(of:max!)
+            sorted_images.append(images[location!])
+            result.remove(at: location!)
+            images.remove(at: location!)
+        }
+        
+        // Display captured images
+        Image_1.image = sorted_images[0]
+        Image_2.image = sorted_images[1]
+        Image_3.image = sorted_images[2]
+        Image_4.image = sorted_images[3]
+        Image_5.image = sorted_images[4]
+        Image_6.image = sorted_images[5]
         let alertController = UIAlertController(title: "Instructions", message: "Photo Mode 2 Instructions", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alertController, animated: true, completion: nil)
+        
     }
     
     // CMPT275 - Function to Delete selected photos

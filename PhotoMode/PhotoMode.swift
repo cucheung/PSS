@@ -14,7 +14,10 @@
 //  10/19/2018 - Added HVAA Button placeholder
 //  10/25/2018 - Code Cleanup (comments), Added View transition to ProcessPhotos
 //  10/25/2018 - Added Photo Instruction Alert (Placeholder), Added Back button (in Storyboard)
-//  10/25/2018 - Added Alert Diaglog when Camera is not detected
+//  10/25/2018 - Added Alert Dialog when Camera is not detected
+//  10/27/2018 - Shutter button can now be only pressed once to avoid multiple function calls,
+//               Added Error Handling when saving photos
+
 
 import UIKit
 import Photos
@@ -130,21 +133,26 @@ extension ViewController {
     }
     
     @IBAction func captureImage(_ sender: UIButton) {
+        (sender as? UIButton)?.isEnabled = false
         cameraController.captureImage {(image, error) in
             guard let image = image else {
                 print(error ?? "Image capture error")
                 return
             }
-            
-            try? PHPhotoLibrary.shared().performChangesAndWait {
-                PHAssetChangeRequest.creationRequestForAsset(from: image)
-            }
-            
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAsset(from: image)
+                }, completionHandler: { success, error in
+                    if success {
+                        NSLog("Saved Photo")
+                    } else {
+                        NSLog("Failed Saving Photo")
+                    }
+                })
         }
-        
         // CMPT275 - Present Process Photos View Controller after capturing photos
-        let viewController = storyboard?.instantiateViewController(withIdentifier: "processphotos") as! UIViewController
+        let viewController = self.storyboard?.instantiateViewController(withIdentifier: "processphotos") as! UIViewController
         self.present(viewController, animated: true)
+        (sender as? UIButton)?.isEnabled = true;
         }
 
     }
