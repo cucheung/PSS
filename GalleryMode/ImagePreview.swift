@@ -15,6 +15,7 @@
 //  10/15/2018 - Removed Slide feature to slide between photos in Preview Mode
 //  10/25/2018 - Code Cleanup (comments)
 //  10/25/2018 - Cleaned up ImagePreview UI, fixed Delete Photo functionality, Added Back Button
+//  10/27/2018 - Added Firebase Upload Alerts, Changed passedContentOffset -> imgOffset, Modified cell.imgView.image to pass correct image offset
 
 import UIKit
 import FirebaseStorage // CMPT 275 - Import Firebase library
@@ -26,8 +27,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     var myCollectionView: UICollectionView!
     var imgArray = [UIImage]()
-    var passedContentOffset = IndexPath()
-    var updatedOffset = IndexPath()
+    var imgOffset: Int!
     var imgIndex: UIImage!
     
     // CMPT275 - Back button
@@ -107,8 +107,6 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         myCollectionView.register(ImagePreviewFullViewCell.self, forCellWithReuseIdentifier: "Cell")
         // CMPT275 - Added isScrollEnabled
         myCollectionView.isScrollEnabled = false;
-        myCollectionView.isPagingEnabled = true
-        myCollectionView.scrollToItem(at: passedContentOffset, at: .left, animated: true)
     
         self.view.addSubview(myCollectionView)
         
@@ -127,8 +125,9 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImagePreviewFullViewCell
-        cell.imgView.image=imgArray[indexPath.row]
-        imgIndex = imgArray[indexPath.row];
+        let rowNumber : Int = imgOffset
+        cell.imgView.image=imgArray[rowNumber]
+        imgIndex = imgArray[rowNumber];
         return cell
     }
     
@@ -168,21 +167,32 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     // CMPT275 - Upload Photo Function
     @objc func uploadPhoto() {
+        var success = false
         // Obtain unique ID for image
         let imageName = NSUUID().uuidString
         // Create reference to backup destination
         let storageRef = Storage.storage().reference().child("backup").child("\(imageName).jpg")
         // Upload Photo and check if error has occurred
+        
         if let uploadData = UIImagePNGRepresentation(imgIndex) {
-            
-            storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
-                
-                if let error = error {
-                    print(error)
-                    return
-                }
-            })
+            let uploadTask = storageRef.putData(uploadData, metadata: nil)
+            // Monitor Upload Status (Success)
+            uploadTask.observe(.success) { snapshot in
+                let alertController = UIAlertController(title: "Upload Complete!", message: "Photo was uploaded successfully", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                success = true;
+            }
         }
+        // Wait for 10 seconds and check whether upload has completed
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
+            if (success == false)
+                {
+                    let alertController = UIAlertController(title: "Upload Failed!", message: "Unable to Upload Photo. Please Try Again.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+        })
 }
     
     // CMPT275 - Share (modified to select the correct image in image array)
@@ -207,7 +217,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         
         // Find corresponding photo to delete via index
-        let rowNumber : Int = passedContentOffset.section
+        let rowNumber : Int = imgOffset
         if (fetchResult.object(at: rowNumber) != nil) {
             var lastAsset: PHAsset = fetchResult.object(at: rowNumber) as! PHAsset
             let arrayToDelete = NSArray(object: lastAsset)

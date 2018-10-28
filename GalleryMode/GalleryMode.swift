@@ -1,7 +1,7 @@
 //  GalleryMode.swift
 //  Source used: https://github.com/Akhilendra/photosAppiOS
 
-//  Description: Image Preview in Gallery. The following Swift file handles the following features: Share / Delete / Backup
+//  Description: Gallery Mode - This file handles fetching the images from device and displaying it onto the screen
 
 //  CMPT 275 Group 3 - SavePark
 //  Fall 2018
@@ -15,6 +15,7 @@
 //  10/15/2018 - Added Delete Functionality (currently does not delete the correct photo)
 //  10/25/2018 - Code Cleanup (comments)
 //  10/25/2018 - Added Back Button
+//  10/27/2018 - Updated Description, Pass imgOffset variable to ImagePreview
 
 import UIKit
 import Photos
@@ -74,7 +75,8 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         print(indexPath)
         let vc=ImagePreviewVC()
         vc.imgArray = self.imageArray
-        vc.passedContentOffset = indexPath
+        // CMPT 275 - Obtain index of Photo
+        vc.imgOffset = indexPath.row
         present(vc, animated: true)
     }
     
