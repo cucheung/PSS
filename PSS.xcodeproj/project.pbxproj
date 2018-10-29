@@ -18,7 +18,7 @@
 		E0A3A0E72174161200774E32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0A3A0E62174161100774E32 /* GoogleService-Info.plist */; };
 		E0AE5BE52182EE76009E0B0D /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0AE5BE42182EE76009E0B0D /* opencv2.framework */; };
 		E0AE5BE92182EEA2009E0B0D /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = E0AE5BE82182EEA2009E0B0D /* OpenCVWrapper.mm */; };
-		E0C7CC5021731C8500B88962 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C7CC4F21731C8400B88962 /* ImagePicker.swift */; };
+		E0C7CC5021731C8500B88962 /* ImagePickerSandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C7CC4F21731C8400B88962 /* ImagePickerSandbox.swift */; };
 		E0D87F73217B09100029AF28 /* PSSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D87F72217B09100029AF28 /* PSSUITests.swift */; };
 		F4D077821EDC0A91001B0881 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D077811EDC0A91001B0881 /* CameraController.swift */; };
 		F71B75231838AF7DEFF4F7A4 /* Pods_PSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 402E62AAEF701438A66B135D /* Pods_PSS.framework */; };
@@ -54,7 +54,7 @@
 		E0AE5BE72182EEA2009E0B0D /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 		E0AE5BE82182EEA2009E0B0D /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
 		E0AE5BEA2182EF56009E0B0D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		E0C7CC4F21731C8400B88962 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		E0C7CC4F21731C8400B88962 /* ImagePickerSandbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerSandbox.swift; sourceTree = "<group>"; };
 		E0D87F70217B09100029AF28 /* PSSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PSSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D87F72217B09100029AF28 /* PSSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSSUITests.swift; sourceTree = "<group>"; };
 		E0D87F74217B09100029AF28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 			children = (
 				E088185021743DBD001AAE4F /* GalleryMode.swift */,
 				E088185221743DBD001AAE4F /* ImagePreview.swift */,
-				E0C7CC4F21731C8400B88962 /* ImagePicker.swift */,
+				E0C7CC4F21731C8400B88962 /* ImagePickerSandbox.swift */,
 			);
 			path = GalleryMode;
 			sourceTree = "<group>";
@@ -334,7 +334,7 @@
 				AF7DD4D31ED3AA28005C880E /* AppDelegate.swift in Sources */,
 				E088185521743DBD001AAE4F /* ImagePreview.swift in Sources */,
 				E0AE5BE92182EEA2009E0B0D /* OpenCVWrapper.mm in Sources */,
-				E0C7CC5021731C8500B88962 /* ImagePicker.swift in Sources */,
+				E0C7CC5021731C8500B88962 /* ImagePickerSandbox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
