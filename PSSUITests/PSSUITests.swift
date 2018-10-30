@@ -7,10 +7,11 @@
 //  Fall 2018
 
 //  File Created By: Curtis Cheung
-//  File Modified By: Curtis Cheung
+//  File Modified By: Curtis Cheung, David Ling
 
 //  Changes:
 //  10/20/2018 - Added dummy XCTAssertFalse test for Travis CI
+//  10/30/2018 - Added button testing
 
 import XCTest
 
@@ -33,11 +34,160 @@ class PSSUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
+    func testPhotoModeLaunch() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        app.buttons["Photo Mode"].tap()
+        app.alerts["Instructions"].buttons["OK"].tap()
+        app.buttons["Back"].tap()
+        
 
         XCTAssertFalse(false)
     }
+    
+    func testPhotoModeCapture() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        app.buttons["Photo Mode"].tap()
+        
+        let okButton = app.alerts["Instructions"].buttons["OK"]
+        okButton.tap()
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button).element.tap()
+        okButton.tap()
+        
+        
+        XCTAssertFalse(false)
+    }
+    
+    func testPhotoModeNoSelectAndSave() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        
+        let app = XCUIApplication()
+        app.buttons["Photo Mode"].tap()
+        
+        let okButton = app.alerts["Instructions"].buttons["OK"]
+        okButton.tap()
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button).element.tap()
+        okButton.tap()
 
+        app.buttons["Save"].tap()
+
+
+        
+        XCTAssertFalse(false)
+    }
+    
+    func testPhotoModeSelectAndSave() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        
+        let app = XCUIApplication()
+        app.buttons["Photo Mode"].tap()
+        
+        let okButton = app.alerts["Instructions"].buttons["OK"]
+        okButton.tap()
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element(boundBy: 2).children(matching: .other).element.children(matching: .button).element.tap()
+        okButton.tap()
+        
+        app.buttons["Save"].tap()
+        app.alerts["Allow “PSS” to delete this photo?"].buttons["Delete"].tap()
+    
+        
+        
+        
+        XCTAssertFalse(false)
+    }
+    
+    func testPhotoModeFlash() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        
+        let app = XCUIApplication()
+        app.buttons["Photo Mode"].tap()
+        app.alerts["Instructions"].buttons["OK"].tap()
+        app.buttons["Flash Off Icon"].tap()
+        app.buttons["Flash On Icon"].tap()
+        
+
+    
+        XCTAssertFalse(false)
+    }
+    
+    func testPhotoModeRearCamera() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        
+        let app = XCUIApplication()
+        app.buttons["Photo Mode"].tap()
+        app.alerts["Instructions"].buttons["OK"].tap()
+        app.buttons["Rear Camera Icon"].tap()
+        app.buttons["Front Camera Icon"].tap()
+        
+   
+        XCTAssertFalse(false)
+    }
+    
+    func testGalleryModeLaunch() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        app.buttons["Gallery Mode"].tap()
+        app.buttons["Back"].tap()
+        
+
+        
+        XCTAssertFalse(false)
+    }
+    
+    func testGalleryModeShare() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+
+        
+        let app = XCUIApplication()
+        app.buttons["Gallery Mode"].tap()
+        
+        let collectionViewsQuery = app.collectionViews
+        collectionViewsQuery.children(matching: .cell).element(boundBy: 3).children(matching: .other).element.tap()
+        XCUIApplication().buttons["Share"].tap()
+
+        XCTAssertFalse(false)
+    }
+    
+    func testGalleryModeBackup() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        app.buttons["Gallery Mode"].tap()
+        app.collectionViews.children(matching: .cell).element(boundBy: 0).children(matching: .other).element.tap()
+        app.buttons["Backup"].tap()
+        app.alerts["Upload Complete!"].buttons["OK"].tap()
+        
+        XCTAssertFalse(false)
+    }
+    
+    func testGalleryModeDelete() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        app.buttons["Gallery Mode"].tap()
+        app.collectionViews.children(matching: .cell).element(boundBy: 0).children(matching: .other).element.tap()
+        app.buttons["Delete"].tap()
+        app.alerts["Allow “PSS” to delete this photo?"].buttons["Delete"].tap()
+        
+
+        XCTAssertFalse(false)
+    }
 }
