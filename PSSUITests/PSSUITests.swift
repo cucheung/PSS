@@ -79,7 +79,6 @@ class PSSUITests: XCTestCase {
         app.buttons["Save"].tap()
 
 
-        
         XCTAssertFalse(false)
     }
     
@@ -99,9 +98,7 @@ class PSSUITests: XCTestCase {
         app.buttons["Save"].tap()
         app.alerts["Allow “PSS” to delete this photo?"].buttons["Delete"].tap()
     
-        
-        
-        
+
         XCTAssertFalse(false)
     }
     
