@@ -15,7 +15,8 @@
 //  10/25/2018 - Implemented OpenCV Functionality
 //  10/25/2018 - Changed colour of buttons to correspond to Save/Delete states
 //  10/25/2018 - Added Photo Instruction Alert (Placeholder)
-//  10/27/2019 - Fixed Photo Display issue (was not displaying the captured photos but rather the previous 6 photos)
+//  10/27/2018 - Fixed Photo Display issue (was not displaying the captured photos but rather the previous 6 photos)
+//  10/29/2018 - Increased sleep timer to 3 seconds after pressing Save button to allow Delete Notification to appear first
 
 import Photos
 
@@ -153,8 +154,8 @@ class ProcessPhotos: UIViewController {
                 deleteImage(index: index)
             }
         }
-        // Sleep for two seconds to wait for initial delete prompt to appear
-        sleep(2)
+        // Sleep for 3 seconds to wait for initial delete prompt to appear
+        sleep(3)
         // Return back to Viewfinder
         dismiss(animated: true)
         
@@ -188,7 +189,7 @@ class ProcessPhotos: UIViewController {
     
     
     func fetchPhotos () {
-        // Sort the images by descending creation date and fetch the first 3
+        // Sort the images by descending creation date and fetch the first 6
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
         fetchOptions.fetchLimit = 6

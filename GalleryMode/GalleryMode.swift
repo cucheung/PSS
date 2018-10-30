@@ -16,6 +16,7 @@
 //  10/25/2018 - Code Cleanup (comments)
 //  10/25/2018 - Added Back Button
 //  10/27/2018 - Updated Description, Pass imgOffset variable to ImagePreview
+//  10/29/2018 - Added Photo Fetch limit to 50 to avoid memory leak
 
 import UIKit
 import Photos
@@ -121,6 +122,7 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             requestOptions.isSynchronous=true
             requestOptions.deliveryMode = .highQualityFormat
             let fetchOptions=PHFetchOptions()
+            // CMPT275 - Added Fetch Limit to prevent memory leak
             fetchOptions.fetchLimit = 50
             fetchOptions.sortDescriptors=[NSSortDescriptor(key:"creationDate", ascending: false)]
             

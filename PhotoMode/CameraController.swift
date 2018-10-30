@@ -13,6 +13,7 @@
 //  Changes:
 //  10/14/2018 - Modified captureImage() function to capture 6 Photos instead of a single photo
 //  10/25/2018 - Code Cleanup (comments)
+//  10/29/2018 - Added different sleep timer for different capture modes (Flash photos take longer to capture compared to regular photos)
 
 
 import AVFoundation
@@ -205,7 +206,17 @@ extension CameraController {
         for setting in settings {
             setting.flashMode = self.flashMode
             self.photoOutput?.capturePhoto(with: setting, delegate: self)
-            usleep(500000)
+            if ((self.flashMode) == .on)
+            {
+                // Sleep for 3 seconds to allow flash photo to complete capture and written to storage
+                sleep(3)
+            }
+            else
+            {
+                // Sleep for 0.5 seconds to allow picture to be written to storage
+                usleep(500000)
+            }
+
             self.photoCaptureCompletionBlock = completion
         }
     
