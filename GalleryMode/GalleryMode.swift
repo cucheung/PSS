@@ -120,8 +120,8 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             let requestOptions=PHImageRequestOptions()
             requestOptions.isSynchronous=true
             requestOptions.deliveryMode = .highQualityFormat
-            
             let fetchOptions=PHFetchOptions()
+            fetchOptions.fetchLimit = 50
             fetchOptions.sortDescriptors=[NSSortDescriptor(key:"creationDate", ascending: false)]
             
             let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)

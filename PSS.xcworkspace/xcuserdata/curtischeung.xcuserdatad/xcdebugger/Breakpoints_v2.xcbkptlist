@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GalleryMode/GalleryMode.swift"
-            timestampString = "562398440.904562"
+            timestampString = "562563576.126143"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "71"
@@ -26,13 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PhotoMode/PhotoMode.swift"
-            timestampString = "562462198.652786"
+            timestampString = "562557671.182651"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "115"
             endingLineNumber = "115"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "switchCameras(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
