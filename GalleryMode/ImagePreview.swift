@@ -230,6 +230,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
                     success, error in
             })
         }
+        dismiss(animated: true, completion: nil)
     }
 }
 
