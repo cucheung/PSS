@@ -33,7 +33,20 @@ class PSSUITests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testNoCameraAccess() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        
+        let app = XCUIApplication()
+        app.buttons["Photo Mode"].tap()
+        app.alerts["Error"].buttons["OK"].tap()
 
+        
+        
+        XCTAssertFalse(false)
+    }
     func testPhotoModeLaunch() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -92,6 +105,7 @@ class PSSUITests: XCTestCase {
         
         let okButton = app.alerts["Instructions"].buttons["OK"]
         okButton.tap()
+        
         app.children(matching: .window).element(boundBy: 0).children(matching: .other).element(boundBy: 2).children(matching: .other).element.children(matching: .button).element.tap()
         okButton.tap()
         
@@ -153,9 +167,9 @@ class PSSUITests: XCTestCase {
         
         let app = XCUIApplication()
         app.buttons["Gallery Mode"].tap()
-        
+        usleep(8000)
         let collectionViewsQuery = app.collectionViews
-        collectionViewsQuery.children(matching: .cell).element(boundBy: 3).children(matching: .other).element.tap()
+        collectionViewsQuery.children(matching: .cell).element(boundBy: 0).tap()
         XCUIApplication().buttons["Share"].tap()
 
         XCTAssertFalse(false)
@@ -167,9 +181,9 @@ class PSSUITests: XCTestCase {
         
         let app = XCUIApplication()
         app.buttons["Gallery Mode"].tap()
-        app.collectionViews.children(matching: .cell).element(boundBy: 0).children(matching: .other).element.tap()
+        usleep(8000)
+        app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
         app.buttons["Backup"].tap()
-        app.alerts["Upload Complete!"].buttons["OK"].tap()
         
         XCTAssertFalse(false)
     }
@@ -180,9 +194,8 @@ class PSSUITests: XCTestCase {
         
         let app = XCUIApplication()
         app.buttons["Gallery Mode"].tap()
-        app.collectionViews.children(matching: .cell).element(boundBy: 0).children(matching: .other).element.tap()
+        app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
         app.buttons["Delete"].tap()
-        app.alerts["Allow “PSS” to delete this photo?"].buttons["Delete"].tap()
         
 
         XCTAssertFalse(false)
