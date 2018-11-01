@@ -83,6 +83,7 @@ class ProcessPhotos: UIViewController {
     // CMPT 275 - Photo Mode Instructions Alert
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        sleep(2)
         // Fetch last 6 photos to images[]
         fetchPhotos()
         // Process Photos
