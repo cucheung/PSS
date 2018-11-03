@@ -27,19 +27,6 @@ class iPhone_UITest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testNoCameraAccess() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        
-        let app = XCUIApplication()
-        app.buttons["Photo Mode"].tap()
-        app.alerts["Error"].buttons["OK"].tap()
-        
-        
-        
-        XCTAssertFalse(false)
-    }
     func testPhotoModeLaunch() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -83,27 +70,6 @@ class iPhone_UITest: XCTestCase {
         okButton.tap()
         
         app.buttons["Save"].tap()
-        
-        
-        XCTAssertFalse(false)
-    }
-    
-    func testPhotoModeSelectAndSave() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        
-        let app = XCUIApplication()
-        app.buttons["Photo Mode"].tap()
-        
-        let okButton = app.alerts["Instructions"].buttons["OK"]
-        okButton.tap()
-        
-        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element(boundBy: 2).children(matching: .other).element.children(matching: .button).element.tap()
-        okButton.tap()
-        
-        app.buttons["Save"].tap()
-        app.alerts["Allow “PSS” to delete this photo?"].buttons["Delete"].tap()
         
         
         XCTAssertFalse(false)
