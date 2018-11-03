@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1000"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -116,16 +116,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E0D87F6F217B09100029AF28"
-               BuildableName = "PSSUITests.xctest"
-               BlueprintName = "PSSUITests"
-               ReferencedContainer = "container:PSS.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "E0CB703A218E2E52006A94DF"
                BuildableName = "Simulator_UITest.xctest"
                BlueprintName = "Simulator_UITest"
@@ -133,17 +123,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E0CB7048218E3445006A94DF"
-               BuildableName = "PSSUITests_iPhone.xctest"
-               BlueprintName = "PSSUITests_iPhone"
-               ReferencedContainer = "container:PSS.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E0EC5DC0218E390500B549FF"
@@ -151,6 +131,10 @@
                BlueprintName = "iPhone_UITest"
                ReferencedContainer = "container:PSS.xcodeproj">
             </BuildableReference>
+            <LocationScenarioReference
+               identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
+               referenceType = "1">
+            </LocationScenarioReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
