@@ -15,7 +15,7 @@
 
 import XCTest
 
-class PSSUITests: XCTestCase {
+class PSSUITests_iPhone: XCTestCase {
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
