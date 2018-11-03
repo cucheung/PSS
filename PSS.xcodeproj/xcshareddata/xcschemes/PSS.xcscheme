@@ -142,6 +142,16 @@
                ReferencedContainer = "container:PSS.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E0EC5DC0218E390500B549FF"
+               BuildableName = "iPhone_UITest.xctest"
+               BlueprintName = "iPhone_UITest"
+               ReferencedContainer = "container:PSS.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

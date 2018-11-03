@@ -1,22 +1,15 @@
-//  PSSUITests.swift
-//  PSSUITests
-
-//  Description: UI Test Cases for PSS
-
-//  CMPT 275 Group 3 - SavePark
-//  Fall 2018
-
-//  File Created By: Curtis Cheung
-//  File Modified By: Curtis Cheung, David Ling
-
-//  Changes:
-//  10/20/2018 - Added dummy XCTAssertFalse test for Travis CI
-//  10/30/2018 - Added button testing
+//
+//  iPhone_UITest.swift
+//  iPhone_UITest
+//
+//  Created by Curtis Cheung on 2018-11-03.
+//  Copyright © 2018 CMPT275_G3. All rights reserved.
+//
 
 import XCTest
 
-class PSSUITests_iPhone: XCTestCase {
-    
+class iPhone_UITest: XCTestCase {
+
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
@@ -200,4 +193,5 @@ class PSSUITests_iPhone: XCTestCase {
         
         XCTAssertFalse(false)
     }
+
 }
