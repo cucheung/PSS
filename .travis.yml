@@ -1,9 +1,6 @@
 os: osx
 language: swift 
 osx_image: xcode10
-xcode_workspace: PSS.xcworkspace 
-xcode_scheme: PSS
-xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone 8 
 before_install:
 - brew install git-lfs
 
@@ -11,3 +8,6 @@ before_script:
 - git lfs install
 - git lfs pull
 - xcodebuild clean
+
+script:
+- set -o pipefail && xcodebuild -workspace PSS.xcworkspace -scheme PSS -destination platform\=iOS\ Simulator,OS\=12.0,name\=iPhone\ 8 -only-testing:Simulator_UITests build test | xcpretty
