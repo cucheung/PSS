@@ -17,6 +17,7 @@
 //  10/25/2018 - Added Alert Dialog when Camera is not detected
 //  10/27/2018 - Shutter button can now be only pressed once to avoid multiple function calls,
 //               Added Error Handling when saving photos
+//  11/04/2018 - Request Gallery Access along with Photo Access to fix access issue in ProcessPhotos()
 
 
 import UIKit
@@ -60,7 +61,18 @@ class ViewController: UIViewController {
             alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             present(alertController, animated: true, completion: nil)
         }
-
+        //Request Photo Access
+        let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                } else {
+                    let alertController = UIAlertController(title: "Error", message: "No Gallery Access", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            })
+        }
     }
     
 }

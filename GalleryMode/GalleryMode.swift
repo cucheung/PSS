@@ -17,6 +17,7 @@
 //  10/25/2018 - Added Back Button
 //  10/27/2018 - Updated Description, Pass imgOffset variable to ImagePreview
 //  10/29/2018 - Added Photo Fetch limit to 50 to avoid memory leak
+//  11/04/2018 - Display Error Prompt if Gallery Access is not granted
 
 import UIKit
 import Photos
@@ -58,7 +59,6 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         
         // Obtain pictures from device storage
         grabPhotos()
-        
     }
     
     //MARK: CollectionView
@@ -109,9 +109,23 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         dismiss(animated: true)
     }
     
+    
     //MARK: grab photos
     func grabPhotos(){
         imageArray = []
+        
+        //Request Photo Access
+        let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                } else {
+                    let alertController = UIAlertController(title: "Error", message: "No Gallery Access", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            })
+        }
         
         DispatchQueue.global(qos: .background).async {
             print("This is run on the background queue")
