@@ -9,4 +9,4 @@ before_script:
 - git lfs pull
 
 script:
-- xcodebuild clean -allowProvisioningUpdates -workspace PSS.xcworkspace -scheme PSS -destination platform\=iOS\ Simulator,OS\=12.0,name\=iPhone\ 8 build test
+- set -o pipefail && xcodebuild clean -allowProvisioningUpdates -workspace PSS.xcworkspace -scheme PSS -destination platform\=iOS\ Simulator,OS\=12.0,name\=iPhone\ 8 build test | xcpretty
