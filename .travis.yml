@@ -10,3 +10,4 @@ before_install:
 before_script:
 - git lfs install
 - git lfs pull
+- xcodebuild clean
