@@ -46,9 +46,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OER-Eo-TZy">
-                                        <rect key="frame" x="322" y="112" width="31" height="30"/>
+                                        <rect key="frame" x="318" y="112" width="40" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="HAA"/>
+                                        <state key="normal" title="HVAA"/>
                                         <connections>
                                             <action selector="HVAA_toggle:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P3I-aG-Djn"/>
                                         </connections>

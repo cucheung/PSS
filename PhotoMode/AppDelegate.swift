@@ -1,12 +1,16 @@
-//
 //  AppDelegate.swift
-//  AV Foundation
-//
-//  Created by Pranjal Satija on 5/22/17.
-//  Copyright © 2017 Pranjal Satija. All rights reserved.
-//
-// Modified by CMPT275 Group 3
-// Modules added in File: Firebase
+
+//  Description: AppDelegate file to perform any actions when app is launched
+
+//  CMPT 275 Group 3 - SavePark
+//  Fall 2018
+
+//  File Created By: Curtis Cheung
+//  File Modified By: Curtis Cheung
+
+//  All changes are marked with "CMPT275" (no quotes)
+//  Changes:
+//  10/14/2018 - Created
 
 import UIKit
 import Firebase
@@ -21,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // CMPT275 - Configure Firebase
         FirebaseApp.configure()
         return true
         }

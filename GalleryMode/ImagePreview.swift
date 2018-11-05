@@ -9,6 +9,8 @@
 //  File Created By: Curtis Cheung
 //  File Modified By: Curtis Cheung
 
+//  Known Bug(s): When selecting the "Delete" button in ImagePreview.swift, the gallery mode view still shows the deleted photo (GitHub Issue #2)
+
 //  All changes are marked with "CMPT275" (no quotes)
 //  Changes:
 //  10/10/2018 - Changed Grid Tile Size for easier access
@@ -234,6 +236,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 }
 
+// Setup Image Preview Cell
 class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
     
     var scrollImg: UIScrollView!
@@ -252,6 +255,7 @@ class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
         scrollImg.minimumZoomScale = 1.0
         scrollImg.maximumZoomScale = 4.0
         
+        // Configue double tap to zoom on image
         let doubleTapGest = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTapScrollView(recognizer:)))
         doubleTapGest.numberOfTapsRequired = 2
         scrollImg.addGestureRecognizer(doubleTapGest)
