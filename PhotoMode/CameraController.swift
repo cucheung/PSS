@@ -1,7 +1,8 @@
 //  CameraController.swift
 //  Source used: https://github.com/appcoda/FullScreenCamera
 
-//  Description: Camera Controller for Photo Mode
+//  Description: Camera Controller Helper Function for PhotoMode
+//  This file contains the functionality of the functions called in PhotoMode.swift
 
 //  CMPT 275 Group 3 - SavePark
 //  Fall 2018

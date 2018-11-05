@@ -2,6 +2,7 @@
 //  Source used: https://github.com/appcoda/FullScreenCamera
 
 //  Description: Camera Controller for Photo Mode
+//  This file sets up the UI buttons for Photo Mode
 
 //  CMPT 275 Group 3 - SavePark
 //  Fall 2018
