@@ -1,10 +1,16 @@
-//
 //  iPhone_UITest.swift
 //  iPhone_UITest
-//
-//  Created by Curtis Cheung on 2018-11-03.
-//  Copyright © 2018 CMPT275_G3. All rights reserved.
-//
+
+//  Description: iPhone UITest (for testing on Physical iPhone ONLY! Testing on Simulator will lead to failed tests due to the lack of hardware support (camera) and not containing any stock photos to test Gallery Mode)
+
+//  CMPT 275 Group 3 - SavePark
+//  Fall 2018
+
+//  File Created By: Curtis Cheung
+//  File Modified By: Curtis Cheung, David Ling
+
+//  Changes:
+//  11/02/2018 - David: Added Test Cases
 
 import XCTest
 
@@ -27,23 +33,19 @@ class iPhone_UITest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    // Test Photo Mode view Instruction Prompt and back button
     func testPhotoModeLaunch() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
         let app = XCUIApplication()
         app.buttons["Photo Mode"].tap()
         app.alerts["Instructions"].buttons["OK"].tap()
         app.buttons["Back"].tap()
         
-        
         XCTAssertFalse(false)
     }
     
+    // Test Photo Mode Shutter button functionality
     func testPhotoModeCapture() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
+
         let app = XCUIApplication()
         app.buttons["Photo Mode"].tap()
         
@@ -52,14 +54,11 @@ class iPhone_UITest: XCTestCase {
         app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button).element.tap()
         okButton.tap()
         
-        
         XCTAssertFalse(false)
     }
     
+    // Test Photo Mode process (Select Photo Mode, Capture Picture, Select Save)
     func testPhotoModeNoSelectAndSave() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
         
         let app = XCUIApplication()
         app.buttons["Photo Mode"].tap()
@@ -71,14 +70,11 @@ class iPhone_UITest: XCTestCase {
         
         app.buttons["Save"].tap()
         
-        
         XCTAssertFalse(false)
     }
     
+    // Test Flash Mode toggle button in Photo Mode
     func testPhotoModeFlash() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
         
         let app = XCUIApplication()
         app.buttons["Photo Mode"].tap()
@@ -86,26 +82,22 @@ class iPhone_UITest: XCTestCase {
         app.buttons["Flash Off Icon"].tap()
         app.buttons["Flash On Icon"].tap()
         
-        
-        
         XCTAssertFalse(false)
     }
     
+    // Test Camera Selection toggle button in Photo Mode
     func testPhotoModeRearCamera() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        
+
         let app = XCUIApplication()
         app.buttons["Photo Mode"].tap()
         app.alerts["Instructions"].buttons["OK"].tap()
         app.buttons["Rear Camera Icon"].tap()
         app.buttons["Front Camera Icon"].tap()
         
-        
         XCTAssertFalse(false)
     }
     
+    // Test Gallery Mode View
     func testGalleryModeLaunch() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -114,16 +106,11 @@ class iPhone_UITest: XCTestCase {
         app.buttons["Gallery Mode"].tap()
         app.buttons["Back"].tap()
         
-        
-        
         XCTAssertFalse(false)
     }
     
+    // Test Gallery Mode Share button functionality
     func testGalleryModeShare() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        
         let app = XCUIApplication()
         app.buttons["Gallery Mode"].tap()
         usleep(8000)
@@ -134,10 +121,8 @@ class iPhone_UITest: XCTestCase {
         XCTAssertFalse(false)
     }
     
+    // Test Gallery Mode Backup button functionality
     func testGalleryModeBackup() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
         let app = XCUIApplication()
         app.buttons["Gallery Mode"].tap()
         usleep(8000)
@@ -147,15 +132,12 @@ class iPhone_UITest: XCTestCase {
         XCTAssertFalse(false)
     }
     
+    // Test Gallery Mode Delete button functionality
     func testGalleryModeDelete() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
         let app = XCUIApplication()
         app.buttons["Gallery Mode"].tap()
         app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
         app.buttons["Delete"].tap()
-        
         
         XCTAssertFalse(false)
     }

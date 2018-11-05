@@ -80,8 +80,7 @@ class ViewController: UIViewController {
 
 extension ViewController {
     override func viewDidLoad() {
-        
-        
+        // Setup Camera Viewfinder Preview
         func configureCameraController() {
             cameraController.prepare {(error) in
                 if let error = error {
@@ -93,6 +92,7 @@ extension ViewController {
             }
         }
         
+        // Setup Shutter Button style
         func styleCaptureButton() {
             captureButton.layer.borderColor = UIColor.black.cgColor
             captureButton.layer.borderWidth = 2
@@ -107,6 +107,7 @@ extension ViewController {
 }
 
 extension ViewController {
+    // Toggle Flash Button Functionality
     @IBAction func toggleFlash(_ sender: UIButton) {
         if cameraController.flashMode == .on {
             cameraController.flashMode = .off
@@ -119,11 +120,12 @@ extension ViewController {
         }
     }
     
-    // CMPT275 - HVAA Feature
+    // CMPT275 - HVAA Feature (To be implemented)
     @IBAction func HVAA_toggle(_ sender: UIButton) {
         NSLog("Works")
     }
     
+    // Switch Camera Button Functionality
     @IBAction func switchCameras(_ sender: UIButton) {
         do {
             try cameraController.switchCameras()
@@ -145,6 +147,7 @@ extension ViewController {
         }
     }
     
+    // Capture Button Functionality
     @IBAction func captureImage(_ sender: UIButton) {
         // CMPT 275 - Disable button after single button
         (sender as? UIButton)?.isEnabled = false

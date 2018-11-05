@@ -1,7 +1,7 @@
-//  PSSUITests.swift
-//  PSSUITests
+//  Simulator_UITest.swift
+//  Simulator_UITest
 
-//  Description: UI Test Cases for PSS
+//  Description: Simulator UI Test (FOR SIMULATOR ONLY!)
 
 //  CMPT 275 Group 3 - SavePark
 //  Fall 2018
@@ -34,17 +34,15 @@ class Simulator_UITest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
+    // Test Photo Mode (No Camera detected alert prompt)
     func testNoCameraAccess() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        
         let app = XCUIApplication()
         app.buttons["Photo Mode"].tap()
         app.alerts["Error"].buttons["OK"].tap()
         XCTAssertFalse(false)
     }
     
+    // Test Gallery Mode View
     func testGalleryModeLaunch() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
