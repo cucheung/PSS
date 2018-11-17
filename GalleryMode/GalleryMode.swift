@@ -18,6 +18,7 @@
 //  10/27/2018 - Updated Description, Pass imgOffset variable to ImagePreview
 //  10/29/2018 - Added Photo Fetch limit to 50 to avoid memory leak
 //  11/04/2018 - Display Error Prompt if Gallery Access is not granted
+//  11/17/2018 - Moved Photo Access request to viewDidLoad()
 
 import UIKit
 import Photos
@@ -58,7 +59,19 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         myCollectionView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
         
         // Obtain pictures from device storage
-        grabPhotos()
+        //Request Photo Access
+        let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                    self.grabPhotos()
+                } else {
+                    let alertController = UIAlertController(title: "Error", message: "No Gallery Access", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            })
+        }
     }
     
     //MARK: CollectionView
@@ -113,19 +126,6 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     //MARK: grab photos
     func grabPhotos(){
         imageArray = []
-        
-        //Request Photo Access
-        let photos = PHPhotoLibrary.authorizationStatus()
-        if photos == .notDetermined {
-            PHPhotoLibrary.requestAuthorization({status in
-                if status == .authorized{
-                } else {
-                    let alertController = UIAlertController(title: "Error", message: "No Gallery Access", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            })
-        }
         
         DispatchQueue.global(qos: .background).async {
             print("This is run on the background queue")

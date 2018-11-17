@@ -11,14 +11,15 @@
 
 //  All changes are marked with "CMPT275" (no quotes)
 //  Changes:
-//  11/17/2018 - Added Google Firebase Cloud Backup implementation, Share option for each Photo
+//  11/17/2018 - Created (imported from GalleryMode.swift)
+//  11/17/2018 - Moved Photo Access request to viewDidLoad()
 
 import UIKit
 import Photos
 
 class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate {
     
-    var myCollectionView: UICollectionView!
+    var EditorCollectionView: UICollectionView!
     var imageArray=[UIImage]()
     
     override func viewDidLoad() {
@@ -41,18 +42,30 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         // Setup Collection View Grid for Gallery
         let layout = UICollectionViewFlowLayout()
         
-        myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        myCollectionView.delegate=self
-        myCollectionView.dataSource=self
-        myCollectionView.register(PhotoItemCell.self, forCellWithReuseIdentifier: "Cell")
-        myCollectionView.backgroundColor=UIColor.white
-        self.view.addSubview(myCollectionView)
+        EditorCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+        EditorCollectionView.delegate=self
+        EditorCollectionView.dataSource=self
+        EditorCollectionView.register(EditorModeItemCell.self, forCellWithReuseIdentifier: "Cell")
+        EditorCollectionView.backgroundColor=UIColor.white
+        self.view.addSubview(EditorCollectionView)
         self.view.addSubview(backButton)
         
-        myCollectionView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
+        EditorCollectionView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
         
         // Obtain pictures from device storage
-        grabPhotos()
+        //Request Photo Access
+        let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                    self.grabPhotos()
+                } else {
+                    let alertController = UIAlertController(title: "Error", message: "No Gallery Access", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            })
+        }
     }
     
     //MARK: CollectionView
@@ -61,7 +74,7 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoItemCell
+        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! EditorModeItemCell
         cell.img.image=imageArray[indexPath.item]
         return cell
     }
@@ -77,7 +90,7 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width
-        if DeviceInfo.Orientation.isPortrait {
+        if EditorModeDeviceInfo.Orientation.isPortrait {
             // CMPT275 - Modified grid size (default:4 override: 2)
             return CGSize(width: width/2 - 1, height: width/2 - 1)
         } else {
@@ -87,7 +100,7 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        myCollectionView.collectionViewLayout.invalidateLayout()
+        EditorCollectionView.collectionViewLayout.invalidateLayout()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -108,18 +121,6 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func grabPhotos(){
         imageArray = []
         
-        //Request Photo Access
-        let photos = PHPhotoLibrary.authorizationStatus()
-        if photos == .notDetermined {
-            PHPhotoLibrary.requestAuthorization({status in
-                if status == .authorized{
-                } else {
-                    let alertController = UIAlertController(title: "Error", message: "No Gallery Access", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            })
-        }
         
         DispatchQueue.global(qos: .background).async {
             print("This is run on the background queue")
@@ -153,7 +154,7 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             
             DispatchQueue.main.async {
                 print("This is run on the main queue, after the previous code in outer block")
-                self.myCollectionView.reloadData()
+                self.EditorCollectionView.reloadData()
             }
         }
     }
@@ -167,7 +168,7 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 // Function to display each photo in a Cell
-class PhotoItemCell: UICollectionViewCell {
+class EditorModeItemCell: UICollectionViewCell {
     
     var img = UIImageView()
     
@@ -189,7 +190,7 @@ class PhotoItemCell: UICollectionViewCell {
     }
 }
 
-struct DeviceInfo {
+struct EditorModeDeviceInfo {
     struct Orientation {
         // indicate current device is in the LandScape orientation
         static var isLandscape: Bool {

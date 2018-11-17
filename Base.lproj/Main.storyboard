@@ -108,10 +108,10 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
-        <!--View Controller-->
+        <!--Editor-->
         <scene sceneID="Vbg-i6-jjN">
             <objects>
-                <viewController id="DBJ-DQ-5IJ" sceneMemberID="viewController">
+                <viewController id="DBJ-DQ-5IJ" customClass="Editor" customModule="PSS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q3a-MY-RXd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
