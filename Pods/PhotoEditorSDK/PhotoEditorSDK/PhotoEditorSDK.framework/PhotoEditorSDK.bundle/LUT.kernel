@@ -1,0 +1,69 @@
+// Try to get the exact pixel of the lut map image
+vec3 lutColor(sampler u_lookupTable, float u_resolution, int texPosX, int texPosY) {
+  vec2 texCoord = vec2(float(texPosX), u_resolution - float(texPosY)) + vec2(0.5, -0.5);
+  return sample(u_lookupTable, samplerTransform(u_lookupTable, texCoord)).rgb;
+}
+
+vec3 bilinearInterpolate(vec3 cRfGf, vec3 cRfGc, vec3 cRcGf, vec3 cRcGc, float redFract, float greenFract) {
+  return mix(mix(cRfGf, cRcGf, redFract), mix(cRfGc, cRcGc, redFract), greenFract);
+}
+
+kernel vec4 coreImageKernel(sampler u_image, sampler u_lookupTable, float u_intensity, float u_horizontalTileCount, float u_verticalTileCount, float u_resolution)
+{
+  vec4 inputColor = clamp(sample(u_image, samplerCoord(u_image)), 0.0, 1.0);
+
+  vec3 sourceColor = vec3(inputColor.rgb / max(inputColor.a, 0.000001));
+
+  vec3 ranges = vec3(
+                     floor(u_resolution / u_horizontalTileCount - 1.0),
+                     floor(u_resolution / u_verticalTileCount - 1.0),
+                     floor(u_horizontalTileCount * u_horizontalTileCount - 1.0)
+                     );
+
+  vec3 tmp = sourceColor * ranges;
+  ivec3 floors = ivec3(tmp);
+  ivec3 ceils = ivec3(ceil(tmp));
+  vec3 fracts = fract(tmp);
+
+  // Map tile index to tile pixel pos.
+  ivec2 pixelsPerTile = ivec2(
+                              u_resolution / u_horizontalTileCount,
+                              u_resolution / u_verticalTileCount
+                              );
+
+  ivec2 tileFloor; // Blue tile index
+  tileFloor.y = floors.z / int(u_horizontalTileCount);
+  tileFloor.x = (floors.z - (tileFloor.y * int(u_horizontalTileCount)));
+
+  ivec2 tileCeil; // Blue tile index
+  tileCeil.y = ceils.z / int(u_horizontalTileCount);
+  tileCeil.x = (ceils.z - (tileCeil.y * int(u_horizontalTileCount)));
+
+  tileFloor *= pixelsPerTile;
+  tileCeil *= pixelsPerTile;
+
+
+  // Interpolate between red and green
+  vec3 lutColorFB = bilinearInterpolate(
+                                        lutColor(u_lookupTable, u_resolution, tileFloor.x + floors.x, tileFloor.y + floors.y),
+                                        lutColor(u_lookupTable, u_resolution, tileFloor.x + floors.x, tileFloor.y + ceils.y),
+                                        lutColor(u_lookupTable, u_resolution, tileFloor.x + ceils.x,  tileFloor.y + floors.y),
+                                        lutColor(u_lookupTable, u_resolution, tileFloor.x + ceils.x,  tileFloor.y + ceils.y),
+                                        fracts.x, fracts.y
+                                        );
+  vec3 lutColorCB = bilinearInterpolate(
+                                        lutColor(u_lookupTable, u_resolution, tileCeil.x + floors.x, tileCeil.y + floors.y),
+                                        lutColor(u_lookupTable, u_resolution, tileCeil.x + floors.x, tileCeil.y + ceils.y),
+                                        lutColor(u_lookupTable, u_resolution, tileCeil.x + ceils.x,  tileCeil.y + floors.y),
+                                        lutColor(u_lookupTable, u_resolution, tileCeil.x + ceils.x,  tileCeil.y + ceils.y),
+                                        fracts.x, fracts.y
+                                        );
+
+  // Interpolate between the blue values
+  vec3 interpolation = mix(lutColorFB, lutColorCB, fracts.z);
+
+  // Round Color Values to prevent that for ex. 254.999999 is cutting to 254 instead of 255;
+  interpolation = clamp(floor(interpolation * 255. + .5) / 255., 0.0, 1.0);
+
+  return mix(inputColor, vec4(interpolation.rgb * inputColor.a, inputColor.a), u_intensity);
+}

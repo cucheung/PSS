@@ -11,17 +11,26 @@
 //  All changes are marked with "CMPT275" (no quotes)
 //  Changes:
 //  10/14/2018 - Created
+//  11/17/2018 - Added PhotoEditorSDK License File
 
 import UIKit
 import Firebase
 import Photos
+import PhotoEditorSDK
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        if let licenseURL = Bundle.main.url(forResource: "ios_license", withExtension: "dms") {
+            PESDK.unlockWithLicense(at: licenseURL)
+        }
+        
+        return true
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

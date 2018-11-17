@@ -57,10 +57,12 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - PhotoEditorSDK (8.6.4)
 
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Storage
+  - PhotoEditorSDK
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -74,6 +76,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - nanopb
+    - PhotoEditorSDK
 
 SPEC CHECKSUMS:
   Firebase: b48f9e653da971ecce5b8c749684bc8bb2d26bd3
@@ -86,7 +89,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: abb092d2c12e817fa3e0e7b274987dd72fb86ec3
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  PhotoEditorSDK: aa3c02d1c37667fd51a74b040bdccf25ce3a1a5e
 
-PODFILE CHECKSUM: fa28fcb2cc2395097ea232366d005bda00b90d06
+PODFILE CHECKSUM: e0fab8f2d1ff31b1ca7ee1ba53275300be4d8dac
 
 COCOAPODS: 1.5.3

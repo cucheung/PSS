@@ -12,6 +12,7 @@
 		AF7DD4D81ED3AA28005C880E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF7DD4D61ED3AA28005C880E /* Main.storyboard */; };
 		AF7DD4DA1ED3AA28005C880E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7DD4D91ED3AA28005C880E /* Assets.xcassets */; };
 		AF7DD4DD1ED3AA28005C880E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF7DD4DB1ED3AA28005C880E /* LaunchScreen.storyboard */; };
+		E018465421A0A0540019D884 /* EditorMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E018465321A0A0540019D884 /* EditorMode.swift */; };
 		E0490CBF2182598200A55957 /* ProcessPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0490CBE2182598200A55957 /* ProcessPhotos.swift */; };
 		E088185321743DBD001AAE4F /* GalleryMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E088185021743DBD001AAE4F /* GalleryMode.swift */; };
 		E088185521743DBD001AAE4F /* ImagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E088185221743DBD001AAE4F /* ImagePreview.swift */; };
@@ -52,6 +53,7 @@
 		AF7DD4D91ED3AA28005C880E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF7DD4DC1ED3AA28005C880E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF7DD4DE1ED3AA28005C880E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E018465321A0A0540019D884 /* EditorMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorMode.swift; sourceTree = "<group>"; };
 		E0490CBE2182598200A55957 /* ProcessPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessPhotos.swift; sourceTree = "<group>"; };
 		E088185021743DBD001AAE4F /* GalleryMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryMode.swift; sourceTree = "<group>"; };
 		E088185221743DBD001AAE4F /* ImagePreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePreview.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				E012253A218557180030B3C8 /* OpenCV */,
 				AF7DD4D11ED3AA28005C880E /* PhotoMode */,
 				E012253B218557570030B3C8 /* GalleryMode */,
+				E018465221A0A0260019D884 /* Editor Mode */,
 				E0CB703C218E2E52006A94DF /* Simulator_UITest */,
 				E0EC5DC2218E390500B549FF /* iPhone_UITest */,
 				AF7DD4D01ED3AA28005C880E /* Products */,
@@ -173,6 +176,14 @@
 				E088185221743DBD001AAE4F /* ImagePreview.swift */,
 			);
 			path = GalleryMode;
+			sourceTree = "<group>";
+		};
+		E018465221A0A0260019D884 /* Editor Mode */ = {
+			isa = PBXGroup;
+			children = (
+				E018465321A0A0540019D884 /* EditorMode.swift */,
+			);
+			path = "Editor Mode";
 			sourceTree = "<group>";
 		};
 		E0CB703C218E2E52006A94DF /* Simulator_UITest */ = {
@@ -341,6 +352,8 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-PSS/Pods-PSS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${PODS_ROOT}/PhotoEditorSDK/PhotoEditorSDK/PhotoEditorSDK.framework",
+				"${PODS_ROOT}/PhotoEditorSDK/PhotoEditorSDK/PhotoEditorSDK.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -349,6 +362,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PhotoEditorSDK.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/PhotoEditorSDK.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +407,7 @@
 				AF7DD4D31ED3AA28005C880E /* AppDelegate.swift in Sources */,
 				E088185521743DBD001AAE4F /* ImagePreview.swift in Sources */,
 				E0AE5BE92182EEA2009E0B0D /* OpenCVWrapper.mm in Sources */,
+				E018465421A0A0540019D884 /* EditorMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,7 +589,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cmpt275.group3.pss;
+				PRODUCT_BUNDLE_IDENTIFIER = cmpt275.g3.pss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OpenCV/PSS-Bridging-Header.h";
@@ -601,7 +617,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cmpt275.group3.pss;
+				PRODUCT_BUNDLE_IDENTIFIER = cmpt275.g3.pss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OpenCV/PSS-Bridging-Header.h";
