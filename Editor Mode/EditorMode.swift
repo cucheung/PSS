@@ -13,11 +13,40 @@
 //  Changes:
 //  11/17/2018 - Created (imported from GalleryMode.swift)
 //  11/17/2018 - Moved Photo Access request to viewDidLoad()
+//  11/17/2018 - Fixed photo load on 2nd run when Photo Access is already granted
+//  11/17/2018 - Initial PhotoEditorSDK Implementation
 
 import UIKit
 import Photos
+import PhotoEditorSDK
 
-class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate {
+class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate, PhotoEditViewControllerDelegate {
+    
+    // CMPT275 - Save Edited Photo into Storage
+    func photoEditViewController(_ photoEditViewController: PhotoEditViewController, didSave image: UIImage, and data: Data) {
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image)
+        }, completionHandler: { success, error in
+            if success {
+                NSLog("Saved Photo")
+            } else {
+                NSLog("Failed Saving Photo")
+            }
+        })
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // CMPT275 - Present error if failed saving Photos
+    func photoEditViewControllerDidFailToGeneratePhoto(_ photoEditViewController: PhotoEditViewController) {
+        let alertController = UIAlertController(title: "Error", message: "Failed Saving Image", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    // CMPT275 - Dismiss View if user clicks cancel button
+    func photoEditViewControllerDidCancel(_ photoEditViewController: PhotoEditViewController) {
+        dismiss(animated: true, completion: nil)
+    }
     
     var EditorCollectionView: UICollectionView!
     var imageArray=[UIImage]()
@@ -55,6 +84,9 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         // Obtain pictures from device storage
         //Request Photo Access
         let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .authorized{
+            self.grabPhotos()
+        }
         if photos == .notDetermined {
             PHPhotoLibrary.requestAuthorization({status in
                 if status == .authorized{
@@ -66,6 +98,57 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 }
             })
         }
+    }
+    
+    // CMPT275 - Configure Editor Mode Settings
+    private func buildConfiguration() -> Configuration {
+        let configuration = Configuration() { builder in
+            builder.configurePhotoEditorViewController { options in
+                options.actionButtonConfigurationClosure = { cell, menuItem in
+                    cell.captionTintColor = UIColor.white
+                    cell.captionLabel.highlightedTextColor = UIColor.yellow
+                    cell.captionLabel.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 20)
+                }
+            }
+            // Configure camera
+            builder.configureCameraViewController() { options in
+                // Just enable Photos
+                options.allowedRecordingModes = [.photo]
+            }
+        }
+        
+        return configuration
+    }
+    
+    // CMPT275 - Toolbar items for Editor Mode
+    public var toolItems: [PhotoEditMenuItem] {
+        let menuItems: [MenuItem?] = [
+            ToolMenuItem.createTransformToolItem(),
+            ToolMenuItem.createFilterToolItem(),
+            ToolMenuItem.createAdjustToolItem()
+        ]
+        
+        let photoEditMenuItems: [PhotoEditMenuItem] = menuItems.compactMap { menuItem in
+            switch menuItem {
+            case let menuItem as ToolMenuItem:
+                return .tool(menuItem)
+            default:
+                return nil
+            }
+        }
+        return photoEditMenuItems
+    }
+    
+    // CMPT275 - Setup Editor Mode item view controller
+    private func createPhotoEditViewController(with photo: Photo) -> PhotoEditViewController {
+        let configuration = buildConfiguration()
+        let menuItems = toolItems
+        
+        // Create a photo edit view controller
+        let photoEditViewController = PhotoEditViewController(photoAsset: photo, configuration: configuration, menuItems: menuItems)
+        photoEditViewController.delegate = self as? PhotoEditViewControllerDelegate
+        
+        return photoEditViewController
     }
     
     //MARK: CollectionView
@@ -80,12 +163,9 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
-        let vc=ImagePreviewVC()
-        vc.imgArray = self.imageArray
-        // CMPT 275 - Obtain index of Photo
-        vc.imgOffset = indexPath.row
-        present(vc, animated: true)
+        // CMPT275 - Modified to push photo to Photo Editor
+        let photo = Photo(image: imageArray[indexPath.row])
+        present(createPhotoEditViewController(with: photo), animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

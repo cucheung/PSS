@@ -19,6 +19,7 @@
 //  10/29/2018 - Added Photo Fetch limit to 50 to avoid memory leak
 //  11/04/2018 - Display Error Prompt if Gallery Access is not granted
 //  11/17/2018 - Moved Photo Access request to viewDidLoad()
+//  11/17/2018 - Fixed photo load on 2nd run when Photo Access is already granted
 
 import UIKit
 import Photos
@@ -61,6 +62,9 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         // Obtain pictures from device storage
         //Request Photo Access
         let photos = PHPhotoLibrary.authorizationStatus()
+        if photos == .authorized{
+            self.grabPhotos()
+        }
         if photos == .notDetermined {
             PHPhotoLibrary.requestAuthorization({status in
                 if status == .authorized{
