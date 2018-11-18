@@ -39,6 +39,9 @@ class CameraController: NSObject {
     
     var flashMode = AVCaptureDevice.FlashMode.off
     var photoCaptureCompletionBlock: ((UIImage?, Error?) -> Void)?
+    
+    // CMPT275 - HVAA
+    var HVAA = false;
 }
 
 extension CameraController {
