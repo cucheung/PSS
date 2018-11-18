@@ -38,11 +38,25 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
             button.backgroundColor = UIColor.white
             let xPostion:CGFloat = 10
             let yPostion:CGFloat = 30
-            let buttonWidth:CGFloat = 350
+            let buttonWidth:CGFloat = 150
             let buttonHeight:CGFloat = 45
             button.frame = CGRect(x:xPostion, y:yPostion, width:buttonWidth, height:buttonHeight)
             button.setTitle("Back", for: .normal)
             button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+            return button
+        }()
+        
+        // CMPT275 - Firebase Gallery button
+        let FBGallery: UIButton = {
+            let button = UIButton(type: .system)
+            button.backgroundColor = UIColor.white
+            let xPostion:CGFloat = 210
+            let yPostion:CGFloat = 30
+            let buttonWidth:CGFloat = 150
+            let buttonHeight:CGFloat = 45
+            button.frame = CGRect(x:xPostion, y:yPostion, width:buttonWidth, height:buttonHeight)
+            button.setTitle("Firebase", for: .normal)
+            button.addTarget(self, action: #selector(LoadFBGallery), for: .touchUpInside)
             return button
         }()
         
@@ -56,6 +70,7 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         myCollectionView.backgroundColor=UIColor.white
         self.view.addSubview(myCollectionView)
         self.view.addSubview(backButton)
+        self.view.addSubview(FBGallery)
         
         myCollectionView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
         
@@ -124,6 +139,12 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     // CMPT275 - Back Button
     @objc func dismissView() {
         dismiss(animated: true)
+    }
+    
+    // CMPT275 - Load Firebase Gallery Button
+    @objc func LoadFBGallery() {
+        let vc = FirebaseGallery()
+        self.present(vc, animated: true)
     }
     
     

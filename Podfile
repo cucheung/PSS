@@ -8,6 +8,7 @@ target 'PSS' do
   # Pods for PSS
   pod 'Firebase/Core'
   pod 'Firebase/Storage'
+  pod 'Firebase/Database'
   pod 'PhotoEditorSDK'
 
 end

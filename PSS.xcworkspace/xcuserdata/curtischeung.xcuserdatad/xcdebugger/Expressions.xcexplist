@@ -3,10 +3,32 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in FirebaseGallery.grabPhotos():FirebaseGallery.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in FirebaseGallery.grabPhotos():FirebaseGallery.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FirebaseGallery.grabPhotos():FirebaseGallery.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dbRef.children">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ViewController.captureImage(_:):PhotoMode.swift">
          <PersistentStrings>
             <PersistentString
                value = "motion.isAccelerometerActive">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in FirebaseGallery.grabPhotos():FirebaseGallery.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "rest.value">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

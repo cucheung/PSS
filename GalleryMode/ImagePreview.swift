@@ -21,6 +21,7 @@
 
 import UIKit
 import FirebaseStorage // CMPT 275 - Import Firebase library
+import Firebase
 import Foundation
 import Photos
 
@@ -181,6 +182,15 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
             let uploadTask = storageRef.putData(uploadData, metadata: nil)
             // Monitor Upload Status (Success)
             uploadTask.observe(.success) { snapshot in
+                storageRef.downloadURL { (url, error) in
+                    guard let downloadURL = url else {
+                        // Uh-oh, an error occurred!
+                        return
+                    }
+                    // Write the download URL to the Realtime Database
+                    let dbRef = Database.database().reference().child("backup/" + imageName)
+                    dbRef.setValue(downloadURL.absoluteString)
+                }
                 let alertController = UIAlertController(title: "Upload Complete!", message: "Photo was uploaded successfully", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
