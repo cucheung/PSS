@@ -15,7 +15,7 @@
 import XCTest
 
 class iPhone_UITest: XCTestCase {
-
+    
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
@@ -45,7 +45,7 @@ class iPhone_UITest: XCTestCase {
     
     // Test Photo Mode Shutter button functionality
     func testPhotoModeCapture() {
-
+        
         let app = XCUIApplication()
         app.buttons["Photo Mode"].tap()
         
@@ -87,13 +87,38 @@ class iPhone_UITest: XCTestCase {
     
     // Test Camera Selection toggle button in Photo Mode
     func testPhotoModeRearCamera() {
-
+        
         let app = XCUIApplication()
         app.buttons["Photo Mode"].tap()
         app.alerts["Instructions"].buttons["OK"].tap()
         app.buttons["Rear Camera Icon"].tap()
         app.buttons["Front Camera Icon"].tap()
         
+        XCTAssertFalse(false)
+    }
+    
+    // Test HVAA Selection toggle button in Photo Mode
+    func testPhotoModeHVAA() {
+        
+        let app = XCUIApplication()
+        app.buttons["Photo Mode"].tap()
+        app.alerts["Instructions"].buttons["OK"].tap()
+        app.buttons["HVAA OFF"].tap()
+        app.buttons["HVAA ON"].tap()
+        
+        XCTAssertFalse(false)
+    }
+    
+    // Test HVAA feature to produce error in Photo Mode
+    func testPhotoModeHVAAError() {
+        
+        let app = XCUIApplication()
+        app.buttons["Photo Mode"].tap()
+        app.alerts["Instructions"].buttons["OK"].tap()
+        app.buttons["HVAA OFF"].tap()
+        app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button).element.tap()
+        app.alerts["Error"].buttons["OK"].tap()
+   
         XCTAssertFalse(false)
     }
     
@@ -141,5 +166,54 @@ class iPhone_UITest: XCTestCase {
         
         XCTAssertFalse(false)
     }
-
+    
+    // Test Gallery Mode Firebase button functionality
+    func testGalleryModeFirebase() {
+        
+        let app = XCUIApplication()
+        app.buttons["Gallery Mode"].tap()
+        app.buttons["Firebase"].tap()
+        sleep(17) // retrieving wait time
+        app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
+        app.buttons["Back"].tap()
+        
+        XCTAssertFalse(false)
+    }
+    
+    // Test Gallery Mode Firebase share button functionality
+    func testGalleryModeFirebaseShare() {
+        
+        let app = XCUIApplication()
+        app.buttons["Gallery Mode"].tap()
+        app.buttons["Firebase"].tap()
+        sleep(17) // retrieving wait time
+        app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
+        app.buttons["Share"].tap()
+        
+        
+        XCTAssertFalse(false)
+    }
+    
+    // Test Editor Mode View
+    func testEditorModeLaunch() {
+        
+        let app = XCUIApplication()
+        app.buttons["Editor Mode"].tap()
+        app.buttons["Back"].tap()
+        
+        XCTAssertFalse(false)
+    }
+    
+    // Test Editor Mode Save Photo
+    func testEditorModeSavePhoto() {
+        
+        let app = XCUIApplication()
+        app.buttons["Editor Mode"].tap()
+        usleep(8000)
+        app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
+        XCUIApplication().buttons["Save photo"].tap()
+        
+        XCTAssertFalse(false)
+    }
+    
 }

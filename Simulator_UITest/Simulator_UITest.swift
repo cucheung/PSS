@@ -52,4 +52,28 @@ class Simulator_UITest: XCTestCase {
         app.buttons["Back"].tap()
         XCTAssertFalse(false)
     }
+    
+    // Test Gallery Mode Firebase
+    func testGalleryModeFirebase() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        app.buttons["Gallery Mode"].tap()
+        app.buttons["Firebase"].tap()
+        app.buttons["Back"].tap()
+        app.buttons["Back"].tap()
+        XCTAssertFalse(false)
+    }
+    
+    // Test Editor Mode View
+    func testEditorModeLaunch() {
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        app.buttons["Editor Mode"].tap()
+        app.buttons["Back"].tap()
+        XCTAssertFalse(false)
+    }
 }
