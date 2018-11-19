@@ -76,4 +76,5 @@ class Simulator_UITest: XCTestCase {
         app.buttons["Back"].tap()
         XCTAssertFalse(false)
     }
+    
 }

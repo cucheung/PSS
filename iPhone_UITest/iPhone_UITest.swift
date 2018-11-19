@@ -67,7 +67,6 @@ class iPhone_UITest: XCTestCase {
         okButton.tap()
         app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button).element.tap()
         okButton.tap()
-        
         app.buttons["Save"].tap()
         
         XCTAssertFalse(false)
