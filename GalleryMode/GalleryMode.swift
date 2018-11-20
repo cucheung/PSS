@@ -20,6 +20,7 @@
 //  11/04/2018 - Display Error Prompt if Gallery Access is not granted
 //  11/17/2018 - Moved Photo Access request to viewDidLoad()
 //  11/17/2018 - Fixed photo load on 2nd run when Photo Access is already granted
+//  11/19/2018 - Fixed Delete Photo Issue where deleted photo still appears in view by adding observer in this class to detect delete operation
 
 import UIKit
 import Photos
@@ -31,6 +32,9 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // CMPT275 - Add Observer to detect whether photo is deleted in ImagePreview.swift
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList(notification:)), name: NSNotification.Name(rawValue: "load"), object: nil)
         
         // CMPT275 - Back button
         let backButton: UIButton = {
@@ -145,6 +149,11 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     @objc func LoadFBGallery() {
         let vc = FirebaseGallery()
         self.present(vc, animated: true)
+    }
+    
+    // CMPT275 - Reload Gallery View after Delete Operation is performed
+    @objc func loadList(notification: NSNotification) {
+        grabPhotos()
     }
     
     

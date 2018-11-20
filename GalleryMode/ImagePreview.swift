@@ -18,6 +18,7 @@
 //  10/25/2018 - Code Cleanup (comments)
 //  10/25/2018 - Cleaned up ImagePreview UI, fixed Delete Photo functionality, Added Back Button
 //  10/27/2018 - Added Firebase Upload Alerts, Changed passedContentOffset -> imgOffset, Modified cell.imgView.image to pass correct image offset
+//  11/19/2018 - Fixed Delete Photo Issue where deleted photo still appears in view by notifying observer in GalleryMode.swift that Delete action wa performed
 
 import UIKit
 import FirebaseStorage // CMPT 275 - Import Firebase library
@@ -240,6 +241,11 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
                 PHAssetChangeRequest.deleteAssets(arrayToDelete)},
                     completionHandler: {
                     success, error in
+                        // CMPT275 - Refresh View by notifying GalleryMode.swift if "Delete" button was pressed
+                        if success == true
+                        {
+                            NotificationCenter.default.post(name: NSNotification.Name("load"), object: nil)
+                        }
             })
         }
         dismiss(animated: true, completion: nil)
