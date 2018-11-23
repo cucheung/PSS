@@ -14,6 +14,7 @@
 //  All changes are marked with "CMPT275" (no quotes)
 //  Changes:
 //  11/17/2018 - Removed Share and Delete Button in this preview
+//  11/22/2018 - Firebase Image Functionality + Comments
 
 import UIKit
 import FirebaseStorage // CMPT 275 - Import Firebase library
@@ -35,11 +36,25 @@ class FirebaseImagePreviewVC: UIViewController, UICollectionViewDelegate, UIColl
         button.backgroundColor = UIColor.white
         let xPostion:CGFloat = 10
         let yPostion:CGFloat = 30
-        let buttonWidth:CGFloat = 350
+        let buttonWidth:CGFloat = 150
         let buttonHeight:CGFloat = 45
         button.frame = CGRect(x:xPostion, y:yPostion, width:buttonWidth, height:buttonHeight)
         button.setTitle("Back", for: .normal)
         button.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        return button
+    }()
+    
+    // CMPT275 - Firebase Gallery button
+    let DownloadPhoto: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = UIColor.white
+        let xPostion:CGFloat = 210
+        let yPostion:CGFloat = 30
+        let buttonWidth:CGFloat = 150
+        let buttonHeight:CGFloat = 45
+        button.frame = CGRect(x:xPostion, y:yPostion, width:buttonWidth, height:buttonHeight)
+        button.setTitle("Download", for: .normal)
+        button.addTarget(self, action: #selector(DownloadFBPhoto), for: .touchUpInside)
         return button
     }()
     
@@ -57,7 +72,7 @@ class FirebaseImagePreviewVC: UIViewController, UICollectionViewDelegate, UIColl
         return button
     }()
     
-    
+    // Function to run when View is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -84,14 +99,21 @@ class FirebaseImagePreviewVC: UIViewController, UICollectionViewDelegate, UIColl
         // CMPT275 - Display buttons
         self.view.addSubview(shareButton)
         self.view.addSubview(backButton)
+        self.view.addSubview(DownloadPhoto)
         
         myCollectionView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
     }
     
+    // Function determines the number of images in imgArray
+    // Input: UICollectionView
+    // Output: number of images in imgArray
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imgArray.count
     }
     
+    // Function determines the selected image in UICollectionView
+    // Input: Integer index (of selected image)
+    // Output: Cell of corresponding image
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! FirebaseImagePreviewFullViewCell
         // CMPT 275 - Preview image
@@ -101,6 +123,7 @@ class FirebaseImagePreviewVC: UIViewController, UICollectionViewDelegate, UIColl
         return cell
     }
     
+    // Configure UICollectionView frame size
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -113,6 +136,7 @@ class FirebaseImagePreviewVC: UIViewController, UICollectionViewDelegate, UIColl
         myCollectionView.collectionViewLayout.invalidateLayout()
     }
     
+    // Configure UICollectionView view size
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         let offset = myCollectionView.contentOffset
@@ -131,50 +155,15 @@ class FirebaseImagePreviewVC: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     // CMPT275 - Back Button
+    // Input: NULL
+    // Output: Dismiss view
     @objc func dismissView() {
         dismiss(animated: true)
     }
     
-    // CMPT275 - Upload Photo Function
-    @objc func uploadPhoto() {
-        var success = false
-        // Obtain unique ID for image
-        let imageName = NSUUID().uuidString
-        // Create reference to backup destination
-        let storageRef = Storage.storage().reference().child("backup").child("\(imageName).jpg")
-        // Upload Photo and check if error has occurred
-        
-        if let uploadData = UIImagePNGRepresentation(imgIndex) {
-            let uploadTask = storageRef.putData(uploadData, metadata: nil)
-            // Monitor Upload Status (Success)
-            uploadTask.observe(.success) { snapshot in
-                storageRef.downloadURL { (url, error) in
-                    guard let downloadURL = url else {
-                        // Uh-oh, an error occurred!
-                        return
-                    }
-                    // Write the download URL to the Realtime Database
-                    let dbRef = Database.database().reference().child("backup/" + imageName)
-                    dbRef.setValue(downloadURL.absoluteString)
-                }
-                let alertController = UIAlertController(title: "Upload Complete!", message: "Photo was uploaded successfully", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-                success = true;
-            }
-        }
-        // Wait for 10 seconds and check whether upload has completed
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
-            if (success == false)
-                {
-                    let alertController = UIAlertController(title: "Upload Failed!", message: "Unable to Upload Photo. Please Try Again.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
-                }
-        })
-}
-    
     // CMPT275 - Share (modified to select the correct image in image array)
+    // Input: NULL
+    // Output: present() Share Menu
     @objc func shareOnlyImage() {
         let imageShare =  [imgIndex]
         let activityViewController = UIActivityViewController(activityItems: imageShare , applicationActivities: nil)
@@ -182,8 +171,30 @@ class FirebaseImagePreviewVC: UIViewController, UICollectionViewDelegate, UIColl
         self.present(activityViewController, animated: true, completion: nil)
     }
     
+    // CMPT275 - Download Firebase Photo
+    // Input: NULL
+    // Output: Completion flag whether or not image was downloaded successfully
+    @objc func DownloadFBPhoto() {
+        let FBImage =  imgIndex
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: FBImage!)
+        }, completionHandler: { success, error in
+            if success {
+                let alertController = UIAlertController(title: "Success!", message: "Photo Downloaded Successfully!", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            } else {
+                let alertController = UIAlertController(title: "Failed!", message: "Photo was not downloaded! Please Try Again.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            }
+        })
+    }
+    
 
-    // CMPT275 - Delete Image Feature
+    // Function deletes Photo on device of specified index
+    // Input: Index of photo to delete
+    // Output: NULL
     @objc func deleteImage() {
         // Fetch Photo Gallery
         let requestOptions=PHImageRequestOptions()
@@ -251,6 +262,7 @@ class FirebaseImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelega
             scrollImg.setZoomScale(1, animated: true)
         }
     }
+    
     
     func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
         var zoomRect = CGRect.zero

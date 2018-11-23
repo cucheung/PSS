@@ -17,6 +17,7 @@
 //  10/25/2018 - Added Photo Instruction Alert (Placeholder)
 //  10/27/2018 - Fixed Photo Display issue (was not displaying the captured photos but rather the previous 6 photos)
 //  10/29/2018 - Increased sleep timer to 3 seconds after pressing Save button to allow Delete Notification to appear first
+//  11/22/2018 - Added Input/Output Comments to Code
 
 import Photos
 
@@ -80,7 +81,7 @@ class ProcessPhotos: UIViewController {
         Save.addTarget(self, action: #selector(savePhotos), for: .touchUpInside)
     }
     
-    // CMPT 275 - Photo Mode Instructions Alert
+    // Function below runs when the view is shown to the user
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         sleep(2)
@@ -121,6 +122,8 @@ class ProcessPhotos: UIViewController {
     }
     
     // CMPT275 - Function to Delete selected photos
+    // Input: NULL
+    // Output: NULL (calls deleteImage to delete selected pictures and dismisses ProcessPhotos view)
     @objc func savePhotos() {
         
         // Determine which photo switch is on and add to array
@@ -162,6 +165,9 @@ class ProcessPhotos: UIViewController {
         
     }
     
+    // Function deletes Photo on device of specified index
+    // Input: Index of photo to delete
+    // Output: NULL
     func deleteImage(index : Int) {
         // Fetch Photo Gallery
         let requestOptions=PHImageRequestOptions()

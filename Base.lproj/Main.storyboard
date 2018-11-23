@@ -149,30 +149,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rj-1q-7lf">
-                                <rect key="frame" x="131" y="462" width="91" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rj-1q-7lf">
+                                <rect key="frame" x="5" y="498" width="364" height="167"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Gallery Mode"/>
+                                <state key="normal" image="Gallery Mode Button"/>
                                 <connections>
                                     <segue destination="i76-Ob-9tT" kind="show" id="RPt-Zn-0Cv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cM-FS-BrB">
-                                <rect key="frame" x="89" y="424" width="175" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrR-No-AfC">
+                                <rect key="frame" x="5" y="334" width="364" height="167"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Photo Mode"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="gVt-C6-gPd"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrR-No-AfC">
-                                <rect key="frame" x="134" y="500" width="84" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Editor Mode"/>
+                                <state key="normal" image="Editor Mode Button"/>
                                 <connections>
                                     <segue destination="DBJ-DQ-5IJ" kind="show" id="xr6-yc-uaU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cM-FS-BrB">
+                                <rect key="frame" x="5" y="186" width="364" height="147"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Photo Mode Button"/>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="gVt-C6-gPd"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="csF-F8-kuQ">
+                                <rect key="frame" x="59" y="44" width="256" height="134"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="i1W-hL-RbB"/>
@@ -270,7 +274,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Editor Mode Button" width="603" height="247"/>
         <image name="Flash Off Icon" width="24" height="24"/>
+        <image name="Gallery Mode Button" width="601" height="250"/>
+        <image name="Image" width="214" height="194"/>
+        <image name="Photo Mode Button" width="600" height="248"/>
         <image name="Rear Camera Icon" width="24" height="24"/>
     </resources>
 </document>

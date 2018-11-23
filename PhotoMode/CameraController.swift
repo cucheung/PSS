@@ -15,6 +15,7 @@
 //  10/14/2018 - Modified captureImage() function to capture 6 Photos instead of a single photo
 //  10/25/2018 - Code Cleanup (comments)
 //  10/29/2018 - Added different sleep timer for different capture modes (Flash photos take longer to capture compared to regular photos)
+//  11/22/2018 - Added Input/Output Comments to Code
 
 
 import AVFoundation
@@ -44,8 +45,11 @@ class CameraController: NSObject {
     var HVAA = false;
 }
 
+// Camera Controller Extension
 extension CameraController {
     // Setup Camera
+    // Input: NULL
+    // Output: returns AVCaptureSession object to CameraController
     func prepare(completionHandler: @escaping (Error?) -> Void) {
         // Start Video Capture Session
         func createCaptureSession() {
@@ -53,6 +57,8 @@ extension CameraController {
         }
         
         // Determine availible cameras and setup front/rear camera buttons accordingly
+        // Input: NULL
+        // Output: returns available camera configurations to CameraController
         func configureCaptureDevices() throws {
             
             let session = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .unspecified)
@@ -77,6 +83,8 @@ extension CameraController {
         }
         
         // Add Front and Rear Camera to inputs
+        // Input: NULL
+        // Output: Set currentCameraPosition to Rear (default)
         func configureDeviceInputs() throws {
             guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
             
@@ -101,6 +109,8 @@ extension CameraController {
         }
         
         // Configure Photo Capture format from Video Feed
+        // Input: NULL
+        // Output: NULL (begins captureSession video feed)
         func configurePhotoOutput() throws {
             guard let captureSession = self.captureSession else { throw CameraControllerError.captureSessionIsMissing }
             
@@ -134,6 +144,8 @@ extension CameraController {
     }
     
     // Display Video feed of Viewfinder on screen
+    // Input: UIView
+    // Output: returns Viewfinder video feed to UIView
     func displayPreview(on view: UIView) throws {
         guard let captureSession = self.captureSession, captureSession.isRunning else { throw CameraControllerError.captureSessionIsMissing }
         
@@ -146,6 +158,8 @@ extension CameraController {
     }
     
     // Function to switch between front and rear cameras
+    // Input: NULL
+    // Output: returns chosen camera position (depending on current state)
     func switchCameras() throws {
         guard let currentCameraPosition = currentCameraPosition, let captureSession = self.captureSession, captureSession.isRunning else { throw CameraControllerError.captureSessionIsMissing }
         
@@ -202,6 +216,8 @@ extension CameraController {
     
     
     // Capture Photo and Store Photo to device
+    // Input: NULL
+    // Output: returns completion flag back to calling function
     func captureImage(completion: @escaping (UIImage?, Error?) -> Void) {
         guard let captureSession = captureSession, captureSession.isRunning else { completion(nil, CameraControllerError.captureSessionIsMissing); return }
         // CMPT275 - Put Photo Capture Settings into an array as each photo requires a unique setting id

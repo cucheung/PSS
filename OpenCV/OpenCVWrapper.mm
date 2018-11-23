@@ -15,24 +15,32 @@
 //  All changes are marked with "CMPT275" (no quotes)
 //  Changes:
 //  10/25/2018 - Created
+//  11/21/2018 - Added Comments to code
 
 #import "OpenCVWrapper.h"
 #import <opencv2/opencv.hpp>
 
 // Display OpenCV version in Console
+// Input: NULL
+// Output: OpenCV Version on Console Log
 @implementation OpenCVWrapper
 + (NSString *)openCVVersionString {
     return [NSString stringWithFormat:@"OpenCV Version %s",  CV_VERSION];
 }
 
 // Convert UIImage (Swift) to Mat (OpenCV Image Matrix)
+// Input: UIImage
+// Output: Mat (OpenCV image matrix)
 - (cv::Mat)convertUIImageToCVMat:(UIImage *)image {
+    // Determine colour space, width,and height of input UIImage
     CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
     CGFloat cols = image.size.width;
     CGFloat rows = image.size.height;
     
+    // Declare OpenCV Matrix object
     cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels (color channels + alpha)
     
+    // Convert UIImage to Mat
     CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to  data
                                                     cols,                       // Width of bitmap
                                                     rows,                       // Height of bitmap
@@ -49,6 +57,8 @@
 }
 
 // Determine the amount of "blur" in image
+// Input: UIImage
+// Output: Pixel variance of image
 - (double) isImageBlurry:(UIImage *) image {
     // converting UIImage to OpenCV format - Mat
     cv::Mat matImage = [self convertUIImageToCVMat:image];
@@ -61,11 +71,11 @@
     //dst2.convertTo(laplacianImage, CV_8UC1);
     
     // applying Laplacian operator to the image
-    //cv::Laplacian(matImageGrey, laplacianImage, CV_8U);
     //CMPT275
     Laplacian(matImageGrey, laplacianImage, CV_64F);
     cv::Scalar mean, stddev; //0:1st channel, 1:2nd channel and 2:3rd channel
     meanStdDev(laplacianImage, mean, stddev, cv::Mat());
+    // Calculate Variance of greyscale pixels
     double variance = stddev.val[0] * stddev.val[0];
     //CMPT275
     cv::Mat laplacianImage8bit;

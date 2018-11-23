@@ -13,13 +13,17 @@
 //  All changes are marked with "CMPT275" (no quotes)
 //  Changes:
 //  10/25/2018 - Created
+//  11/21/2018 - Added Comments to code
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 NS_ASSUME_NONNULL_BEGIN
 
+// OpenCV Wrapper
 @interface OpenCVWrapper : NSObject
+// Display OpenCV Version
 + (NSString *)openCVVersionString;
+// Function declaration for OpenCV blur image processing
 - (double) isImageBlurry:(UIImage *) image;
 
 @end
