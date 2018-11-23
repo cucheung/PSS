@@ -37,7 +37,7 @@ class Simulator_UITest: XCTestCase {
     // Test Photo Mode (No Camera detected alert prompt)
     func testNoCameraAccess() {
         let app = XCUIApplication()
-        app.buttons["Photo Mode"].tap()
+        app.buttons["Photo Mode Button"].tap()
         app.alerts["Error"].buttons["OK"].tap()
         XCTAssertFalse(false)
     }
@@ -48,8 +48,9 @@ class Simulator_UITest: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
         let app = XCUIApplication()
-        app.buttons["Gallery Mode"].tap()
+        app.buttons["Gallery Mode Button"].tap()
         app.buttons["Back"].tap()
+        
         XCTAssertFalse(false)
     }
     
@@ -59,7 +60,7 @@ class Simulator_UITest: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
         let app = XCUIApplication()
-        app.buttons["Gallery Mode"].tap()
+        app.buttons["Gallery Mode Button"].tap()
         app.buttons["Firebase"].tap()
         app.buttons["Back"].tap()
         app.buttons["Back"].tap()
@@ -72,7 +73,7 @@ class Simulator_UITest: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
         let app = XCUIApplication()
-        app.buttons["Editor Mode"].tap()
+        app.buttons["Editor Mode Button"].tap()
         app.buttons["Back"].tap()
         XCTAssertFalse(false)
     }

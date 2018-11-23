@@ -36,7 +36,7 @@ class iPhone_UITest: XCTestCase {
     // Test Photo Mode view Instruction Prompt and back button
     func testPhotoModeLaunch() {
         let app = XCUIApplication()
-        app.buttons["Photo Mode"].tap()
+        app.buttons["Photo Mode Button"].tap()
         app.alerts["Instructions"].buttons["OK"].tap()
         app.buttons["Back"].tap()
         
@@ -47,7 +47,7 @@ class iPhone_UITest: XCTestCase {
     func testPhotoModeCapture() {
         
         let app = XCUIApplication()
-        app.buttons["Photo Mode"].tap()
+        app.buttons["Photo Mode Button"].tap()
         
         let okButton = app.alerts["Instructions"].buttons["OK"]
         okButton.tap()
@@ -61,7 +61,7 @@ class iPhone_UITest: XCTestCase {
     func testPhotoModeNoSelectAndSave() {
         
         let app = XCUIApplication()
-        app.buttons["Photo Mode"].tap()
+        app.buttons["Photo Mode Button"].tap()
         
         let okButton = app.alerts["Instructions"].buttons["OK"]
         okButton.tap()
@@ -76,7 +76,7 @@ class iPhone_UITest: XCTestCase {
     func testPhotoModeFlash() {
         
         let app = XCUIApplication()
-        app.buttons["Photo Mode"].tap()
+        app.buttons["Photo Mode Button"].tap()
         app.alerts["Instructions"].buttons["OK"].tap()
         app.buttons["Flash Off Icon"].tap()
         app.buttons["Flash On Icon"].tap()
@@ -88,7 +88,7 @@ class iPhone_UITest: XCTestCase {
     func testPhotoModeRearCamera() {
         
         let app = XCUIApplication()
-        app.buttons["Photo Mode"].tap()
+        app.buttons["Photo Mode Button"].tap()
         app.alerts["Instructions"].buttons["OK"].tap()
         app.buttons["Rear Camera Icon"].tap()
         app.buttons["Front Camera Icon"].tap()
@@ -100,7 +100,7 @@ class iPhone_UITest: XCTestCase {
     func testPhotoModeHVAA() {
         
         let app = XCUIApplication()
-        app.buttons["Photo Mode"].tap()
+        app.buttons["Photo Mode Button"].tap()
         app.alerts["Instructions"].buttons["OK"].tap()
         app.buttons["HVAA OFF"].tap()
         app.buttons["HVAA ON"].tap()
@@ -112,12 +112,12 @@ class iPhone_UITest: XCTestCase {
     func testPhotoModeHVAAError() {
         
         let app = XCUIApplication()
-        app.buttons["Photo Mode"].tap()
+        app.buttons["Photo Mode Button"].tap()
         app.alerts["Instructions"].buttons["OK"].tap()
         app.buttons["HVAA OFF"].tap()
         app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button).element.tap()
         app.alerts["Error"].buttons["OK"].tap()
-   
+        
         XCTAssertFalse(false)
     }
     
@@ -127,7 +127,7 @@ class iPhone_UITest: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
         let app = XCUIApplication()
-        app.buttons["Gallery Mode"].tap()
+        app.buttons["Gallery Mode Button"].tap()
         app.buttons["Back"].tap()
         
         XCTAssertFalse(false)
@@ -136,7 +136,7 @@ class iPhone_UITest: XCTestCase {
     // Test Gallery Mode Share button functionality
     func testGalleryModeShare() {
         let app = XCUIApplication()
-        app.buttons["Gallery Mode"].tap()
+        app.buttons["Gallery Mode Button"].tap()
         usleep(8000)
         let collectionViewsQuery = app.collectionViews
         collectionViewsQuery.children(matching: .cell).element(boundBy: 0).tap()
@@ -148,7 +148,7 @@ class iPhone_UITest: XCTestCase {
     // Test Gallery Mode Backup button functionality
     func testGalleryModeBackup() {
         let app = XCUIApplication()
-        app.buttons["Gallery Mode"].tap()
+        app.buttons["Gallery Mode Button"].tap()
         usleep(8000)
         app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
         app.buttons["Backup"].tap()
@@ -159,7 +159,7 @@ class iPhone_UITest: XCTestCase {
     // Test Gallery Mode Delete button functionality
     func testGalleryModeDelete() {
         let app = XCUIApplication()
-        app.buttons["Gallery Mode"].tap()
+        app.buttons["Gallery Mode Button"].tap()
         app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
         app.buttons["Delete"].tap()
         
@@ -170,7 +170,7 @@ class iPhone_UITest: XCTestCase {
     func testGalleryModeFirebase() {
         
         let app = XCUIApplication()
-        app.buttons["Gallery Mode"].tap()
+        app.buttons["Gallery Mode Button"].tap()
         app.buttons["Firebase"].tap()
         sleep(17) // retrieving wait time
         app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
@@ -183,12 +183,24 @@ class iPhone_UITest: XCTestCase {
     func testGalleryModeFirebaseShare() {
         
         let app = XCUIApplication()
-        app.buttons["Gallery Mode"].tap()
+        app.buttons["Gallery Mode Button"].tap()
         app.buttons["Firebase"].tap()
         sleep(17) // retrieving wait time
         app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
         app.buttons["Share"].tap()
         
+        XCTAssertFalse(false)
+    }
+    // Test Gallery Mode Firebase download button functionality
+    func testGalleryModeFirebaseDownload() {
+        
+        let app = XCUIApplication()
+        app.buttons["Gallery Mode Button"].tap()
+        app.buttons["Firebase"].tap()
+        sleep(17) // retrieving wait time
+        app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
+        app.buttons["Download"].tap()
+        XCUIApplication().alerts["Success!"].buttons["OK"].tap()
         
         XCTAssertFalse(false)
     }
@@ -197,7 +209,7 @@ class iPhone_UITest: XCTestCase {
     func testEditorModeLaunch() {
         
         let app = XCUIApplication()
-        app.buttons["Editor Mode"].tap()
+        app.buttons["Editor Mode Button"].tap()
         app.buttons["Back"].tap()
         
         XCTAssertFalse(false)
@@ -207,7 +219,7 @@ class iPhone_UITest: XCTestCase {
     func testEditorModeSavePhoto() {
         
         let app = XCUIApplication()
-        app.buttons["Editor Mode"].tap()
+        app.buttons["Editor Mode Button"].tap()
         usleep(8000)
         app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
         XCUIApplication().buttons["Save photo"].tap()
