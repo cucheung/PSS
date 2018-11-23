@@ -18,7 +18,7 @@
 //  10/25/2018 - Added Alert Dialog when Camera is not detected
 //  10/27/2018 - Shutter button can now be only pressed once to avoid multiple function calls,
 //               Added Error Handling when saving photos
-//  11/04/2018 - Request Gallery Access along with Photo Access to fix access issue in ProcessPhotos()
+//  11/04/2018 - Request Gallery Access along with Photo Access to fix access issue in ProcessPhotos() (Issue #1)
 //  11/17/2018 - Added HVAA Implementation
 //  11/22/2018 - Added Input/Output Comments to Code
 

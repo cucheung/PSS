@@ -11,19 +11,23 @@
 
 //  All changes are marked with "CMPT275" (no quotes)
 //  Changes:
-//  11/17/2018 - Created
+//  11/17/2018 - Created (based on Gallery Mode template)
+//  11/23/2018 - Added Input/Output comments for appropiate functions
+//  11/23/2018 - Refreshed imgArray in GalleryMode after the user presses the "Back" button to show newly downloaded images (Issue #4)
 
 import UIKit
 import Photos
 import FirebaseStorage
 import Firebase
 
-
+// Firebase Gallery View Controller Class
 class FirebaseGallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate {
     
+    // Initialize UICollectionView and image array to store fetched images from Firebase
     var FirebaseCollectionView: UICollectionView!
     var FirebaseimageArray=[UIImage]()
     
+    // Function to run when View is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,6 +60,7 @@ class FirebaseGallery: UIViewController, UICollectionViewDelegate, UICollectionV
         
         
         // Source: https://stackoverflow.com/a/27342233/10498067
+        // Load Images from Firebase Database and store to FirebaseimageArray
         let ref = Database.database().reference().child("backup")
         ref.observeSingleEvent(of: .value, with: { snapshot in
             print(snapshot.childrenCount)
@@ -64,6 +69,7 @@ class FirebaseGallery: UIViewController, UICollectionViewDelegate, UICollectionV
             {
                 let url = rest.value as! String
                 let storageRef = Storage.storage().reference(forURL: url)
+                // 20MB limit on each photo
                 storageRef.getData(maxSize: 20 * 1024 * 1024) { (data, error) -> Void in
                     // Create a UIImage, add it to the array
                     let pic = UIImage(data: data!)
@@ -74,17 +80,25 @@ class FirebaseGallery: UIViewController, UICollectionViewDelegate, UICollectionV
         });
     }
     
-    //MARK: CollectionView
+    // Function determines the number of images in imgArray
+    // Input: UICollectionView
+    // Output: number of images in imgArray
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return FirebaseimageArray.count
     }
     
+    // Function determines the selected image in UICollectionView
+    // Input: Integer index (of selected image)
+    // Output: Cell of corresponding image
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! FirebasePhotoItemCell
         cell.img.image=FirebaseimageArray[indexPath.item]
         return cell
     }
     
+    // Function to pass user selected image in Gallery to FirebaseImagePreview.swift
+    // Input: indexPath (index) of selected image
+    // Output: present() FirebaseImagePreview.swift (Image Preview)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
         let vc=FirebaseImagePreviewVC()
@@ -94,6 +108,9 @@ class FirebaseGallery: UIViewController, UICollectionViewDelegate, UICollectionV
         present(vc, animated: true)
     }
     
+    // Function to set grid size for image gallery Preview
+    // Input: indexPath (image cell index)
+    // Output: Return cell size dimensions (type CGSize)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width
         if DeviceInfo.Orientation.isPortrait {
@@ -104,40 +121,38 @@ class FirebaseGallery: UIViewController, UICollectionViewDelegate, UICollectionV
         }
     }
     
+    // Detect when View Controller changes its subviews to generate a new whole View
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         FirebaseCollectionView.collectionViewLayout.invalidateLayout()
     }
     
+    // Configure spacing between rows/columns in Image Gallery
+    // Input: NULL
+    // Output: Return spacing distance back to collectionView (in this case: 1px)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1.0
     }
     
+    // Configure spacing between items (photo preview) in Image Gallery
+    // Input: NULL
+    // Output: Return spacing distance back to collectionView (in this case: 1px)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1.0
     }
     
     // CMPT275 - Back Button
     @objc func dismissView() {
+        // Notify GalleryMode to refresh its imgArray array to show newly downloaded image
+        NotificationCenter.default.post(name: NSNotification.Name("load"), object: nil)
         dismiss(animated: true)
     }
     
-    
-    //MARK: grab photos
-    func grabFirebasePhotos(){
-
-            print("FireimageArray count: \(self.FirebaseimageArray.count)")
-            DispatchQueue.main.async {
-                print("This is run on the main queue, after the previous code in outer block")
-                self.FirebaseCollectionView.reloadData()
-            }
-        }
-    
+    // Checks whether or not a memory warning occured in any operation
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
 }
 
@@ -146,24 +161,27 @@ class FirebasePhotoItemCell: UICollectionViewCell {
     
     var img = UIImageView()
     
+    // Configure Image Preview Frame
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         img.contentMode = .scaleAspectFill
         img.clipsToBounds=true
         self.addSubview(img)
     }
     
+    // Set window bounds on image preview
     override func layoutSubviews() {
         super.layoutSubviews()
         img.frame = self.bounds
     }
     
+    // Determine if archiving is enabled
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
+// Checks orientation of app and adjusts preview based on orientation
 struct FirebaseDeviceInfo {
     struct Orientation {
         // indicate current device is in the LandScape orientation

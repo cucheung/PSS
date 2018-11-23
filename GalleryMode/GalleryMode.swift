@@ -19,17 +19,21 @@
 //  10/29/2018 - Added Photo Fetch limit to 50 to avoid memory leak
 //  11/04/2018 - Display Error Prompt if Gallery Access is not granted
 //  11/17/2018 - Moved Photo Access request to viewDidLoad()
-//  11/17/2018 - Fixed photo load on 2nd run when Photo Access is already granted
-//  11/19/2018 - Fixed Delete Photo Issue where deleted photo still appears in view by adding observer in this class to detect delete operation
+//  11/17/2018 - Fixed photo load on 2nd run when Photo Access is already granted (Issue #3)
+//  11/19/2018 - Fixed Delete Photo Issue where deleted photo still appears in view by adding observer in this class to detect delete operation (Issue #2)
+//  11/23/2018 - Added Input/Output comments for appropiate functions
 
 import UIKit
 import Photos
 
+// Gallery View Controller class
 class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate {
 
+    // Initialize UICollectionView and image array to store fetched images from Storage
     var myCollectionView: UICollectionView!
     var imageArray=[UIImage]()
     
+    // Function to run when View is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -97,17 +101,25 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         }
     }
     
-    //MARK: CollectionView
+    // Function determines the number of images in imgArray
+    // Input: UICollectionView
+    // Output: number of images in imgArray
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageArray.count
     }
     
+    // Function determines the selected image in UICollectionView
+    // Input: Integer index (of selected image)
+    // Output: Cell of corresponding image
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoItemCell
         cell.img.image=imageArray[indexPath.item]
         return cell
     }
     
+    // Function to pass user selected image in Gallery to FirebaseImagePreview.swift
+    // Input: indexPath (index) of selected image
+    // Output: present() ImagePreview.swift (Image Preview) of selected image
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
         let vc=ImagePreviewVC()
@@ -117,6 +129,9 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         present(vc, animated: true)
     }
     
+    // Function to set grid size for image gallery Preview
+    // Input: indexPath (image cell index)
+    // Output: Return cell size dimensions (type CGSize)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width
         if DeviceInfo.Orientation.isPortrait {
@@ -127,15 +142,22 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         }
     }
     
+    // Detect when View Controller changes its subviews to generate a new whole View
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         myCollectionView.collectionViewLayout.invalidateLayout()
     }
     
+    // Configure spacing between rows/columns in Image Gallery
+    // Input: NULL
+    // Output: Return spacing distance back to collectionView (in this case: 1px)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1.0
     }
-    
+
+    // Configure spacing between items (photo preview) in Image Gallery
+    // Input: NULL
+    // Output: Return spacing distance back to collectionView (in this case: 1px)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1.0
     }
@@ -146,18 +168,20 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
     }
     
     // CMPT275 - Load Firebase Gallery Button
+    // Input: NULL
+    // Output: present() FirebaseGallery View Controller
     @objc func LoadFBGallery() {
         let vc = FirebaseGallery()
         self.present(vc, animated: true)
     }
     
-    // CMPT275 - Reload Gallery View after Delete Operation is performed
+    // CMPT275 - Reload Gallery View after when observer is signaled (after deleting photo or after downloading images from Firebase)
     @objc func loadList(notification: NSNotification) {
         grabPhotos()
     }
     
     
-    //MARK: grab photos
+    // Obtain photos stored in Storage and store to imageArray
     func grabPhotos(){
         imageArray = []
         
@@ -185,12 +209,11 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
                     })
                 }
             } else {
-                // Error if no photos are found
-                // TODO: Add Alert Dialog
                 print("You got no photos.")
             }
             print("imageArray count: \(self.imageArray.count)")
             
+            // Reload myCollectionView after imageArray is fetched
             DispatchQueue.main.async {
                 print("This is run on the main queue, after the previous code in outer block")
                 self.myCollectionView.reloadData()
@@ -202,8 +225,6 @@ class Gallery: UIViewController, UICollectionViewDelegate, UICollectionViewDataS
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
 // Function to display each photo in a Cell
@@ -211,6 +232,7 @@ class PhotoItemCell: UICollectionViewCell {
     
     var img = UIImageView()
     
+    // Configure Image Grid size/preview
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -229,6 +251,7 @@ class PhotoItemCell: UICollectionViewCell {
     }
 }
 
+// Checks orientation of app and adjusts preview based on orientation
 struct DeviceInfo {
     struct Orientation {
         // indicate current device is in the LandScape orientation

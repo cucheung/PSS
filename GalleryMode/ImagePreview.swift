@@ -19,6 +19,7 @@
 //  10/25/2018 - Cleaned up ImagePreview UI, fixed Delete Photo functionality, Added Back Button
 //  10/27/2018 - Added Firebase Upload Alerts, Changed passedContentOffset -> imgOffset, Modified cell.imgView.image to pass correct image offset
 //  11/19/2018 - Fixed Delete Photo Issue where deleted photo still appears in view by notifying observer in GalleryMode.swift that Delete action wa performed
+//  11/23/2018 - Added Input/Output comments
 
 import UIKit
 import FirebaseStorage // CMPT 275 - Import Firebase library
@@ -26,13 +27,14 @@ import Firebase
 import Foundation
 import Photos
 
+// Image Preview Controller Class
 class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
-
-    var myCollectionView: UICollectionView!
-    var imgArray = [UIImage]()
-    var imgOffset: Int!
-    var imgIndex: UIImage!
+    // Initialize variables
+    var myCollectionView: UICollectionView! // Initialize CollectionView
+    var imgArray = [UIImage]() // UIImage array used to store images fetched from Storage passed from GalleryMode.swift
+    var imgOffset: Int! // Used to determine selected image index
+    var imgIndex: UIImage! // Used to store selected image
     
     // CMPT275 - Back button
     let backButton: UIButton = {
@@ -90,7 +92,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         return button
     }()
     
-    
+    // Function to run when View is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -123,10 +125,16 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         myCollectionView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
     }
     
+    // Function determines the number of images in imgArray
+    // Input: UICollectionView
+    // Output: number of images in imgArray
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imgArray.count
     }
     
+    // Function determines the selected image in UICollectionView
+    // Input: Integer index (of selected image)
+    // Output: Cell of corresponding image
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImagePreviewFullViewCell
         // CMPT 275 - Preview image
@@ -136,6 +144,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         return cell
     }
     
+    // Configure UICollectionView frame size
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -148,6 +157,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         myCollectionView.collectionViewLayout.invalidateLayout()
     }
     
+    // Configure UICollectionView view size
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         let offset = myCollectionView.contentOffset
@@ -166,11 +176,15 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     // CMPT275 - Back Button
+    // Input: NULL
+    // Output: Dismiss view
     @objc func dismissView() {
         dismiss(animated: true)
     }
     
     // CMPT275 - Upload Photo Function
+    // Input: NULL
+    // Output: upload imgIndex (type UIImage) using a uniquely generated ID as its filename, return alert whether upload has completed successfully
     @objc func uploadPhoto() {
         var success = false
         // Obtain unique ID for image
@@ -210,6 +224,8 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
 }
     
     // CMPT275 - Share (modified to select the correct image in image array)
+    // Input: NULL
+    // Output: present() Share Menu
     @objc func shareOnlyImage() {
         let imageShare =  [imgIndex]
         let activityViewController = UIActivityViewController(activityItems: imageShare , applicationActivities: nil)
@@ -218,7 +234,9 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
 
-    // CMPT275 - Delete Image Feature
+    // Function deletes Photo on device of specified index
+    // Input: Index of photo to delete
+    // Output: NULL
     @objc func deleteImage() {
         // Fetch Photo Gallery
         let requestOptions=PHImageRequestOptions()
@@ -284,6 +302,9 @@ class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
         imgView.contentMode = .scaleAspectFit
     }
     
+    // Configures double-tap to zoom
+    // Input: Double-tap on screen from user
+    // Output: Zoomed in image preview
     @objc func handleDoubleTapScrollView(recognizer: UITapGestureRecognizer) {
         if scrollImg.zoomScale == 1 {
             scrollImg.zoom(to: zoomRectForScale(scale: scrollImg.maximumZoomScale, center: recognizer.location(in: recognizer.view)), animated: true)
@@ -292,6 +313,7 @@ class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
         }
     }
     
+    // Configure zoom preview area
     func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
         var zoomRect = CGRect.zero
         zoomRect.size.height = imgView.frame.size.height / scale
@@ -312,11 +334,13 @@ class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
         imgView.frame = self.bounds
     }
     
+    // Clean up view when zooming into view to provide zoomed in image
     override func prepareForReuse() {
         super.prepareForReuse()
         scrollImg.setZoomScale(1, animated: true)
     }
     
+    // Determine if archiving is enabled
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

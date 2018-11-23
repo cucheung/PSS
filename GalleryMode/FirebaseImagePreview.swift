@@ -22,13 +22,14 @@ import Firebase
 import Foundation
 import Photos
 
+// Firebase Image Gallery Controller Class
 class FirebaseImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
-
-    var myCollectionView: UICollectionView!
-    var imgArray = [UIImage]()
-    var imgOffset: Int!
-    var imgIndex: UIImage!
+    // Initialize variables
+    var myCollectionView: UICollectionView! // Initialize CollectionView
+    var imgArray = [UIImage]() // UIImage array used to store images fetched from Firebase passed from FirebaseGallery.swift
+    var imgOffset: Int! // Used to determine selected image index
+    var imgIndex: UIImage! // Used to store selected image
     
     // CMPT275 - Back button
     let backButton: UIButton = {
@@ -255,6 +256,9 @@ class FirebaseImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelega
         imgView.contentMode = .scaleAspectFit
     }
     
+    // Configures double-tap to zoom
+    // Input: Double-tap on screen from user
+    // Output: Zoomed in image preview
     @objc func handleDoubleTapScrollView(recognizer: UITapGestureRecognizer) {
         if scrollImg.zoomScale == 1 {
             scrollImg.zoom(to: zoomRectForScale(scale: scrollImg.maximumZoomScale, center: recognizer.location(in: recognizer.view)), animated: true)
@@ -264,6 +268,7 @@ class FirebaseImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelega
     }
     
     
+    // Configure zoom preview area
     func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
         var zoomRect = CGRect.zero
         zoomRect.size.height = imgView.frame.size.height / scale
@@ -284,11 +289,13 @@ class FirebaseImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelega
         imgView.frame = self.bounds
     }
     
+    // Clean up view when zooming into view to provide zoomed in image
     override func prepareForReuse() {
         super.prepareForReuse()
         scrollImg.setZoomScale(1, animated: true)
     }
     
+    // Determine if archiving is enabled
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
