@@ -56,9 +56,13 @@
                                             <segue destination="5Bf-qr-bEQ" kind="show" id="kJW-3h-wUx"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OER-Eo-TZy">
-                                        <rect key="frame" x="271" y="105" width="103" height="42"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OER-Eo-TZy">
+                                        <rect key="frame" x="272" y="107" width="103" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="MtE-9C-uL9"/>
+                                            <constraint firstAttribute="width" constant="103" id="wzD-zo-Lv6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="HVAA OFF">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -70,8 +74,10 @@
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="dNR-Vo-zfA" secondAttribute="trailing" constant="16" id="EjQ-lm-I0V"/>
+                                    <constraint firstItem="OER-Eo-TZy" firstAttribute="top" secondItem="dNR-Vo-zfA" secondAttribute="bottom" constant="8" id="RHP-0Z-wc1"/>
                                     <constraint firstItem="dNR-Vo-zfA" firstAttribute="top" secondItem="TK7-Oc-3y1" secondAttribute="bottom" id="RPo-BF-zn6"/>
                                     <constraint firstItem="TK7-Oc-3y1" firstAttribute="top" secondItem="Lnd-7g-U5f" secondAttribute="top" constant="16" id="Ush-vW-6Qx"/>
+                                    <constraint firstAttribute="trailing" secondItem="OER-Eo-TZy" secondAttribute="trailing" constant="16" id="i8r-C4-BdV"/>
                                     <constraint firstAttribute="trailing" secondItem="TK7-Oc-3y1" secondAttribute="trailing" constant="16" id="tqP-Ux-GM9"/>
                                 </constraints>
                             </view>

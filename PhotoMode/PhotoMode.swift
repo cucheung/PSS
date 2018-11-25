@@ -22,6 +22,7 @@
 //  11/17/2018 - Added HVAA Implementation
 //  11/22/2018 - Added Input/Output Comments to Code
 //  11/24/2018 - Fixed Warnings in code
+//  11/24/2018 - Added Landscape support for Viewfinder
 
 
 import UIKit
@@ -84,20 +85,31 @@ class ViewController: UIViewController {
             })
         }
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        // Source: https://stackoverflow.com/a/44529434/10498067
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldRotate = false
+        // Source: https://stackoverflow.com/a/50720458/10498067
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+        
+    }
 }
 
 extension ViewController {
+    
     // Configure Camera Controller
     // Input/Output: NULL
     override func viewDidLoad() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldRotate = true
         // Setup Camera Viewfinder Preview
         func configureCameraController() {
             cameraController.prepare {(error) in
                 if let error = error {
                     print(error)
-                    cameraDetected = false;
-                    self.dismiss(animated: true)
+                    cameraDetected = true;
+                    //self.dismiss(animated: true)
                 }
                 try? self.cameraController.displayPreview(on: self.capturePreviewView)
             }

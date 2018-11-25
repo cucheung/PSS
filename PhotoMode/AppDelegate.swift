@@ -12,6 +12,7 @@
 //  Changes:
 //  10/14/2018 - Created
 //  11/17/2018 - Added PhotoEditorSDK License File
+//  11/24/2018 - Added Landscape support for Viewfinder in PhotoMode
 
 import UIKit
 import Firebase
@@ -32,6 +33,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    // Source: https://stackoverflow.com/a/44529434/10498067
+    internal var shouldRotate = false
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return shouldRotate ? .allButUpsideDown : .portrait
+    }
+    
+    // Source: https://stackoverflow.com/a/50720458/10498067
+    var orientationLock = UIInterfaceOrientationMask.portrait
+    struct AppUtility {
+        static func lockOrientation(_ orientation: UIInterfaceOrientationMask) {
+            if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                delegate.orientationLock = orientation
+            }
+        }
+        
+        static func lockOrientation(_ orientation: UIInterfaceOrientationMask, andRotateTo rotateOrientation:UIInterfaceOrientation) {
+            self.lockOrientation(orientation)
+            UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
+        }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // CMPT275 - Configure Firebase
