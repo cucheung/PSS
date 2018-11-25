@@ -11,6 +11,7 @@
 
 //  Changes:
 //  11/02/2018 - David: Added Test Cases
+//  11/24/2018 - Added Test Case handling to Handle System Calls
 
 import XCTest
 
@@ -26,6 +27,18 @@ class iPhone_UITest: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
+        addUIInterruptionMonitor(withDescription: "For taking photos") { (alert) -> Bool in
+            alert.buttons["OK"].tap()
+            return true
+        }
+        addUIInterruptionMonitor(withDescription: "For saving photos") { (alert) -> Bool in
+            alert.buttons["OK"].tap()
+            return true
+        }
+        addUIInterruptionMonitor(withDescription: "Allow “PSS” to delete this photo?") { (alert) -> Bool in
+            alert.buttons["Delete"].tap()
+            return true
+        }
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
     
@@ -48,7 +61,8 @@ class iPhone_UITest: XCTestCase {
         
         let app = XCUIApplication()
         app.buttons["Photo Mode Button"].tap()
-        
+        // Wait for notifiation to popup
+        usleep(5000)
         let okButton = app.alerts["Instructions"].buttons["OK"]
         okButton.tap()
         app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .button).element.tap()
@@ -137,7 +151,8 @@ class iPhone_UITest: XCTestCase {
     func testGalleryModeShare() {
         let app = XCUIApplication()
         app.buttons["Gallery Mode Button"].tap()
-        usleep(8000)
+        // Wait for CollectionView to populate (wait 10 seconds)
+        sleep(10)
         let collectionViewsQuery = app.collectionViews
         collectionViewsQuery.children(matching: .cell).element(boundBy: 0).tap()
         XCUIApplication().buttons["Share"].tap()
@@ -149,7 +164,8 @@ class iPhone_UITest: XCTestCase {
     func testGalleryModeBackup() {
         let app = XCUIApplication()
         app.buttons["Gallery Mode Button"].tap()
-        usleep(8000)
+        // Wait for CollectionView to populate (wait 10 seconds)
+        sleep(10)
         app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
         app.buttons["Backup"].tap()
         
@@ -160,8 +176,11 @@ class iPhone_UITest: XCTestCase {
     func testGalleryModeDelete() {
         let app = XCUIApplication()
         app.buttons["Gallery Mode Button"].tap()
+        // Wait for CollectionView to populate (wait 10 seconds)
+        sleep(10)
         app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
         app.buttons["Delete"].tap()
+        app.tap()
         
         XCTAssertFalse(false)
     }
@@ -220,7 +239,8 @@ class iPhone_UITest: XCTestCase {
         
         let app = XCUIApplication()
         app.buttons["Editor Mode Button"].tap()
-        usleep(8000)
+        // Wait for CollectionView to populate (wait 10 seconds)
+        sleep(10)
         app.collectionViews.children(matching: .cell).element(boundBy: 0).tap()
         XCUIApplication().buttons["Save photo"].tap()
         
