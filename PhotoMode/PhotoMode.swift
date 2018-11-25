@@ -108,8 +108,8 @@ extension ViewController {
             cameraController.prepare {(error) in
                 if let error = error {
                     print(error)
-                    cameraDetected = true;
-                    //self.dismiss(animated: true)
+                    cameraDetected = false;
+                    self.dismiss(animated: true)
                 }
                 try? self.cameraController.displayPreview(on: self.capturePreviewView)
             }
