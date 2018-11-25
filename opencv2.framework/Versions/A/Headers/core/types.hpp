@@ -84,7 +84,7 @@ public:
     //! conjugation
     Complex conj() const;
 
-    _Tp re, im; //< the real and the imaginary parts
+    _Tp re, im; // the real and the imaginary parts
 };
 
 typedef Complex<float> Complexf;
@@ -909,7 +909,7 @@ The normalized central moments \f$\texttt{Moments::nu}_{ij}\f$ are computed as:
 
 \f[\texttt{nu} _{ji}= \frac{\texttt{mu}_{ji}}{\texttt{m}_{00}^{(i+j)/2+1}} .\f]
 
-@note
+@note placeholder
 \f$\texttt{mu}_{00}=\texttt{m}_{00}\f$, \f$\texttt{nu}_{00}=1\f$
 \f$\texttt{nu}_{10}=\texttt{mu}_{10}=\texttt{mu}_{01}=\texttt{mu}_{10}=0\f$ , hence the values are not
 stored.

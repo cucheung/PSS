@@ -140,7 +140,7 @@ All the statistical model classes in _ml_ module accepts Ptr\<TrainData\> as par
 words, you can create your own class derived from TrainData and pass smart pointer to the instance
 of this class into StatModel::train.
 
-@sa @ref ml_intro_data
+@sa placeholder @ref ml_intro_data
  */
 class CV_EXPORTS_W TrainData
 {
@@ -393,7 +393,7 @@ public:
 
 /** @brief Bayes classifier for normally distributed data.
 
-@sa @ref ml_intro_bayes
+@sa placeholder @ref ml_intro_bayes
  */
 class CV_EXPORTS_W NormalBayesClassifier : public StatModel
 {
@@ -431,7 +431,7 @@ public:
 
 /** @brief The class implements K-Nearest Neighbors model
 
-@sa @ref ml_intro_knn
+@sa placeholder @ref ml_intro_knn
  */
 class CV_EXPORTS_W KNearest : public StatModel
 {
@@ -513,7 +513,7 @@ public:
 
 /** @brief Support Vector Machines.
 
-@sa @ref ml_intro_svm
+@sa placeholder @ref ml_intro_svm
  */
 class CV_EXPORTS_W SVM : public StatModel
 {
@@ -823,7 +823,7 @@ public:
 
 /** @brief The class implements the Expectation Maximization algorithm.
 
-@sa @ref ml_intro_em
+@sa placeholder @ref ml_intro_em
  */
 class CV_EXPORTS_W EM : public StatModel
 {
@@ -996,7 +996,7 @@ public:
     @param samples Samples from which the Gaussian mixture model will be estimated. It should be a
         one-channel matrix, each row of which is a sample. If the matrix does not have CV_64F type
         it will be converted to the inner matrix of such type for the further computing.
-    @param probs0
+    @param probs0 placeholder
     @param logLikelihoods The optional output matrix that contains a likelihood logarithm value for
         each sample. It has \f$nsamples \times 1\f$ size and CV_64FC1 type.
     @param labels The optional output "class label" for each sample:
@@ -1040,7 +1040,7 @@ the class is capable of storing multiple decision trees and using them for predi
 responses or using a voting schemes), and the derived from DTrees classes (such as RTrees and Boost)
 use this capability to implement decision tree ensembles.
 
-@sa @ref ml_intro_trees
+@sa placeholder @ref ml_intro_trees
 */
 class CV_EXPORTS_W DTrees : public StatModel
 {
@@ -1234,7 +1234,7 @@ public:
 
 /** @brief The class implements the random forest predictor.
 
-@sa @ref ml_intro_rtrees
+@sa placeholder @ref ml_intro_rtrees
  */
 class CV_EXPORTS_W RTrees : public DTrees
 {
@@ -1310,7 +1310,7 @@ public:
 
 /** @brief Boosted tree classifier derived from DTrees
 
-@sa @ref ml_intro_boost
+@sa placeholder @ref ml_intro_boost
  */
 class CV_EXPORTS_W Boost : public DTrees
 {
@@ -1409,7 +1409,7 @@ once, that is, the weights can be adjusted based on the new training data.
 
 Additional flags for StatModel::train are available: ANN_MLP::TrainFlags.
 
-@sa @ref ml_intro_ann
+@sa placeholder @ref ml_intro_ann
  */
 class CV_EXPORTS_W ANN_MLP : public StatModel
 {
@@ -1607,7 +1607,7 @@ typedef ANN_MLP ANN_MLP_ANNEAL;
 
 /** @brief Implements Logistic Regression classifier.
 
-@sa @ref ml_intro_lr
+@sa placeholder @ref ml_intro_lr
  */
 class CV_EXPORTS_W LogisticRegression : public StatModel
 {

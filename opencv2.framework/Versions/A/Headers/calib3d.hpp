@@ -459,13 +459,13 @@ CV_EXPORTS_W void matMulDeriv( InputArray A, InputArray B, OutputArray dABdA, Ou
 @param tvec2 Second translation vector.
 @param rvec3 Output rotation vector of the superposition.
 @param tvec3 Output translation vector of the superposition.
-@param dr3dr1
-@param dr3dt1
-@param dr3dr2
-@param dr3dt2
-@param dt3dr1
-@param dt3dt1
-@param dt3dr2
+@param dr3dr1 placeholder
+@param dr3dt1 placeholder
+@param dr3dr2 placeholder
+@param dr3dt2 placeholder
+@param dt3dr1 placeholder
+@param dt3dt1 placeholder
+@param dt3dr2 placeholder
 @param dt3dt2 Optional output derivatives of rvec3 or tvec3 with regard to rvec1, rvec2, tvec1 and
 tvec2, respectively.
 
@@ -1186,7 +1186,7 @@ stereoCalibrate .
 @param fovy Output field of view in degrees along the vertical sensor axis.
 @param focalLength Focal length of the lens in mm.
 @param principalPoint Principal point in mm.
-@param aspectRatio \f$f_y/f_x\f$
+@param aspectRatio placeholder \f$f_y/f_x\f$
 
 The function computes various useful camera characteristics from the previously estimated camera
 matrix.
@@ -1528,7 +1528,7 @@ final fundamental matrix. It can be set to something like 1-3, depending on the 
 point localization, image resolution, and the image noise.
 @param confidence Parameter used for the RANSAC and LMedS methods only. It specifies a desirable level
 of confidence (probability) that the estimated matrix is correct.
-@param mask
+@param mask placeholder
 
 The epipolar geometry is described by the following equation:
 
@@ -1855,7 +1855,7 @@ fractional bits.
 @param _3dImage Output 3-channel floating-point image of the same size as disparity . Each
 element of _3dImage(x,y) contains 3D coordinates of the point (x,y) computed from the disparity
 map.
-@param Q \f$4 \times 4\f$ perspective transformation matrix that can be obtained with stereoRectify.
+@param Q placeholder \f$4 \times 4\f$ perspective transformation matrix that can be obtained with stereoRectify.
 @param handleMissingValues Indicates, whether the function should handle missing values (i.e.
 points where the disparity was not computed). If handleMissingValues=true, then pixels with the
 minimal disparity that corresponds to the outliers (see StereoMatcher::compute ) are transformed
@@ -2525,7 +2525,7 @@ namespace fisheye
     the number of points in the view.
     @param imagePoints Output array of image points, 2xN/Nx2 1-channel or 1xN/Nx1 2-channel, or
     vector\<Point2f\>.
-    @param affine
+    @param affine placeholder
     @param K Camera matrix \f$K = \vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{_1}\f$.
     @param D Input vector of distortion coefficients \f$(k_1, k_2, k_3, k_4)\f$.
     @param alpha The skew coefficient.
@@ -2600,7 +2600,7 @@ namespace fisheye
     @param D Input vector of distortion coefficients \f$(k_1, k_2, k_3, k_4)\f$.
     @param Knew Camera matrix of the distorted image. By default, it is the identity matrix but you
     may additionally scale and shift the result by using a different matrix.
-    @param new_size
+    @param new_size placeholder
 
     The function transforms an image to compensate radial and tangential lens distortion.
 
@@ -2626,14 +2626,14 @@ namespace fisheye
     /** @brief Estimates new camera matrix for undistortion or rectification.
 
     @param K Camera matrix \f$K = \vecthreethree{f_x}{0}{c_x}{0}{f_y}{c_y}{0}{0}{_1}\f$.
-    @param image_size
+    @param image_size placeholder
     @param D Input vector of distortion coefficients \f$(k_1, k_2, k_3, k_4)\f$.
     @param R Rectification transformation in the object space: 3x3 1-channel, or vector: 3x1/1x3
     1-channel or 1x1 3-channel
     @param P New camera matrix (3x3) or new projection matrix (3x4)
     @param balance Sets the new focal length in range between the min focal length and the max focal
     length. Balance is in range of [0, 1].
-    @param new_size
+    @param new_size placeholder
     @param fov_scale Divisor for new focal length.
      */
     CV_EXPORTS_W void estimateNewCameraMatrixForUndistortRectify(InputArray K, InputArray D, const Size &image_size, InputArray R,

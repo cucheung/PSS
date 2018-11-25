@@ -254,11 +254,9 @@ private:
 
     /** Performs the approximate nearest-neighbor search.
      * @param vec the feature to analyze
-     * @param do_radius flag indicating if we check the radius too
      * @param radius the radius if it is a radius search
      * @param do_k flag indicating if we limit the number of nn
      * @param k_nn the number of nearest neighbors
-     * @param checked_average used for debugging
      */
     void getNeighbors(const ElementType* vec, bool /*do_radius*/, float radius, bool do_k, unsigned int k_nn,
                       float& /*checked_average*/)

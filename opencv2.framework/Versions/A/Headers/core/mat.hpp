@@ -3647,7 +3647,7 @@ beta)`
 The output matrix has the same size and the same type as the input one except for the last case,
 where C is depth=CV_8U .
 @param m matrix.
-@sa @ref MatrixExpressions, absdiff, convertScaleAbs
+@sa placeholder @ref MatrixExpressions, absdiff, convertScaleAbs
  */
 CV_EXPORTS MatExpr abs(const Mat& m);
 /** @overload

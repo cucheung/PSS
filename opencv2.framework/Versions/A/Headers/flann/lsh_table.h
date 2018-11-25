@@ -207,8 +207,8 @@ public:
     }
 
     /** Get a bucket given the key
-     * @param key
-     * @return
+     * @param key placeholder
+     * @return placeholder
      */
     inline const Bucket* getBucketFromKey(BucketKey key) const
     {
@@ -247,7 +247,7 @@ public:
     }
 
     /** Get statistics about the table
-     * @return
+     * @return placeholder
      */
     LshStats getStats() const;
 

@@ -99,7 +99,7 @@ public:
      * Print log message
      * @param level Log level
      * @param fmt Message format
-     * @return
+     * @return placeholder
      */
     static int log(int level, const char* fmt, ...)
     {

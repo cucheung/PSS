@@ -170,7 +170,7 @@ public:
         coincide with the type of the index.
         @param params Structure containing the index parameters. The type of index that will be
         constructed depends on the type of this parameter. See the description.
-        @param distance
+        @param distance placeholder
 
         The method constructs a fast search structure from a set of features using the specified algorithm
         with specified parameters, as defined by params. params is a reference to one of the following class
@@ -398,7 +398,6 @@ int GenericIndex<Distance>::radiusSearch(const Mat& query, Mat& indices, Mat& di
 //! @endcond
 
 /**
- * @deprecated Use GenericIndex class instead
  */
 template <typename T>
 class Index_
@@ -565,7 +564,7 @@ int hierarchicalClustering(const Mat& features, Mat& centers, const ::cvflann::K
     return ::cvflann::hierarchicalClustering<Distance>(m_features, m_centers, params, d);
 }
 
-/** @deprecated
+/**
 */
 template <typename ELEM_TYPE, typename DIST_TYPE>
 CV_DEPRECATED int hierarchicalClustering(const Mat& features, Mat& centers, const ::cvflann::KMeansIndexParams& params)

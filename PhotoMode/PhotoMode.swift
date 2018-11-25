@@ -21,6 +21,7 @@
 //  11/04/2018 - Request Gallery Access along with Photo Access to fix access issue in ProcessPhotos() (Issue #1)
 //  11/17/2018 - Added HVAA Implementation
 //  11/22/2018 - Added Input/Output Comments to Code
+//  11/24/2018 - Fixed Warnings in code
 
 
 import UIKit
@@ -180,7 +181,7 @@ extension ViewController {
         x_accel = self.motion.accelerometerData?.acceleration.x;
         y_accel = self.motion.accelerometerData?.acceleration.y;
         self.motion.stopAccelerometerUpdates()
-        var xy_data = [x_accel,y_accel]
+        let xy_data = [x_accel,y_accel]
         return xy_data
     }
     
@@ -190,7 +191,7 @@ extension ViewController {
     // Output: Present ProcessPhotos View Controller
     @IBAction func captureImage(_ sender: UIButton) {
         // CMPT 275 - Disable button after single button
-        (sender as? UIButton)?.isEnabled = false
+        captureButton.isEnabled = false
         // Check if HVAA flag is enabled
         if (cameraController.HVAA == false)
         {
@@ -210,9 +211,9 @@ extension ViewController {
                 })
             }
             // CMPT275 - Present Process Photos View Controller after capturing photos
-            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "processphotos") as! UIViewController
-            self.present(viewController, animated: true)
-            (sender as? UIButton)?.isEnabled = true;
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "processphotos")
+            self.present(viewController!, animated: true)
+            captureButton.isEnabled = true;
         }
         // Perform HVAA Analysis if HVAA is enabled
         else
@@ -246,17 +247,17 @@ extension ViewController {
                     })
                 }
                 // CMPT275 - Present Process Photos View Controller after capturing photos
-                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "processphotos") as! UIViewController
-                self.present(viewController, animated: true)
+                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "processphotos")
+                self.present(viewController!, animated: true)
                 HVAA_test = false // Reset Flag
-                (sender as? UIButton)?.isEnabled = true;
+                captureButton.isEnabled = true;
             }
             else
             {
                 let alertController = UIAlertController(title: "Error", message: "HVAA Failed. Please Try Again", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alertController, animated: true, completion: nil)
-                (sender as? UIButton)?.isEnabled = true;
+                captureButton.isEnabled = true;
             }
         }
 

@@ -15,6 +15,7 @@
 //  Changes:
 //  11/17/2018 - Removed Share and Delete Button in this preview
 //  11/22/2018 - Firebase Image Functionality + Comments
+//  11/24/2018 - Fixed Warnings in code
 
 import UIKit
 import FirebaseStorage // CMPT 275 - Import Firebase library
@@ -167,7 +168,7 @@ class FirebaseImagePreviewVC: UIViewController, UICollectionViewDelegate, UIColl
     // Output: present() Share Menu
     @objc func shareOnlyImage() {
         let imageShare =  [imgIndex]
-        let activityViewController = UIActivityViewController(activityItems: imageShare , applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: imageShare as [Any] , applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
     }
@@ -209,17 +210,15 @@ class FirebaseImagePreviewVC: UIViewController, UICollectionViewDelegate, UIColl
         
         // Find corresponding photo to delete via index
         let rowNumber : Int = imgOffset
-        if (fetchResult.object(at: rowNumber) != nil) {
-            var lastAsset: PHAsset = fetchResult.object(at: rowNumber) as! PHAsset
-            let arrayToDelete = NSArray(object: lastAsset)
+        let lastAsset: PHAsset = fetchResult.object(at: rowNumber)
+        let arrayToDelete = NSArray(object: lastAsset)
             
-            // Perform delete operation
-            PHPhotoLibrary.shared().performChanges( {
-                PHAssetChangeRequest.deleteAssets(arrayToDelete)},
-                    completionHandler: {
-                    success, error in
+        // Perform delete operation
+        PHPhotoLibrary.shared().performChanges( {
+            PHAssetChangeRequest.deleteAssets(arrayToDelete)},
+                completionHandler: {
+                success, error in
             })
-        }
         dismiss(animated: true, completion: nil)
     }
 }

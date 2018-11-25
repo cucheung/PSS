@@ -503,7 +503,7 @@ enum HistCompMethods {
 };
 
 /** the color conversion code
-@see @ref imgproc_color_conversions
+@see placeholder @ref imgproc_color_conversions
 @ingroup imgproc_misc
  */
 enum ColorConversionCodes {
@@ -2255,7 +2255,7 @@ operate in-place.
 
 @param src input image.
 @param dst output image that has the size dsize and the same type as src .
-@param M \f$2\times 3\f$ transformation matrix.
+@param M placeholder \f$2\times 3\f$ transformation matrix.
 @param dsize size of the output image.
 @param flags combination of interpolation methods (see #InterpolationFlags) and the optional
 flag #WARP_INVERSE_MAP that means that M is the inverse transformation (
@@ -2289,7 +2289,7 @@ and then put in the formula above instead of M. The function cannot operate in-p
 
 @param src input image.
 @param dst output image that has the size dsize and the same type as src .
-@param M \f$3\times 3\f$ transformation matrix.
+@param M placeholder \f$3\times 3\f$ transformation matrix.
 @param dsize size of the output image.
 @param flags combination of interpolation methods (#INTER_LINEAR or #INTER_NEAREST) and the
 optional flag #WARP_INVERSE_MAP, that sets M as the inverse transformation (
@@ -2518,7 +2518,7 @@ rotation-invariant template matching, for object tracking and so forth.
 @endinternal
 */
 CV_EXPORTS_W void logPolar( InputArray src, OutputArray dst,
-                            Point2f center, double M, int flags );
+                           Point2f center, double M, int flags ) __AVAILABILITY_INTERNAL_DEPRECATED;
 
 /** @brief Remaps an image to polar coordinates space.
 
@@ -2559,7 +2559,7 @@ and
 @endinternal
 */
 CV_EXPORTS_W void linearPolar( InputArray src, OutputArray dst,
-                               Point2f center, double maxRadius, int flags );
+                              Point2f center, double maxRadius, int flags ) __AVAILABILITY_INTERNAL_DEPRECATED;
 
 
 /** \brief Remaps an image to polar or semilog-polar coordinates space
@@ -3481,7 +3481,7 @@ floating-point.
 @param dstCn number of channels in the destination image; if the parameter is 0, the number of the
 channels is derived automatically from src and code.
 
-@see @ref imgproc_color_conversions
+@see placeholder @ref imgproc_color_conversions
  */
 CV_EXPORTS_W void cvtColor( InputArray src, OutputArray dst, int code, int dstCn = 0 );
 
@@ -3490,10 +3490,6 @@ stored in two planes.
 
 This function only supports YUV420 to RGB conversion as of now.
 
-@param src1: 8-bit image (#CV_8U) of the Y plane.
-@param src2: image containing interleaved U/V plane.
-@param dst: output image.
-@param code: Specifies the type of conversion. It can take any of the following values:
 - #COLOR_YUV2BGR_NV12
 - #COLOR_YUV2RGB_NV12
 - #COLOR_YUV2BGRA_NV12

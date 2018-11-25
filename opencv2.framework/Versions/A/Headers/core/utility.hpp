@@ -251,7 +251,7 @@ The exact meaning of the return value depends on the threading framework used by
 - `C=` - The index of the current parallel task.
 @sa setNumThreads, getNumThreads
  */
-CV_EXPORTS_W int getThreadNum();
+    CV_EXPORTS_W int getThreadNum() __AVAILABILITY_INTERNAL_DEPRECATED;
 
 /** @brief Returns full configuration time cmake output.
 

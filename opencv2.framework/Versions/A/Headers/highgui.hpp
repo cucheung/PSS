@@ -287,7 +287,7 @@ You can call cv::destroyWindow or cv::destroyAllWindows to close the window and 
 memory usage. For a simple program, you do not really have to call these functions because all the
 resources and windows of the application are closed automatically by the operating system upon exit.
 
-@note
+@note placeholder
 
 Qt backend supports additional flags:
  -   **WINDOW_NORMAL or WINDOW_AUTOSIZE:** WINDOW_NORMAL enables you to resize the
@@ -322,7 +322,7 @@ CV_EXPORTS_W int startWindowThread();
 
 /** @brief Similar to #waitKey, but returns full key code.
 
-@note
+@note placeholder
 
 Key code is implementation specific and depends on used backend: QT/GTK/Win32/etc
 
@@ -337,13 +337,13 @@ function will not wait exactly delay ms, it will wait at least delay ms, dependi
 running on your computer at that time. It returns the code of the pressed key or -1 if no key was
 pressed before the specified time had elapsed.
 
-@note
+@note placeholder
 
 This function is the only method in HighGUI that can fetch and handle events, so it needs to be
 called periodically for normal event processing unless HighGUI is used within an environment that
 takes care of event processing.
 
-@note
+@note placeholder
 
 The function only works if there is at least one HighGUI window created and the window is active.
 If there are several HighGUI windows, any of them can be active.
@@ -377,7 +377,7 @@ infinitely until any keypress (it is suitable for image display). **waitKey(25)*
 for 25 ms, after which display will be automatically closed. (If you put it in a loop to read
 videos, it will display the video frame-by-frame)
 
-@note
+@note placeholder
 
 [__Windows Backend Only__] Pressing Ctrl+C will copy the image to the clipboard.
 
@@ -390,7 +390,7 @@ CV_EXPORTS_W void imshow(const String& winname, InputArray mat);
 
 /** @brief Resizes window to the specified size
 
-@note
+@note placeholder
 
 -   The specified window size is for the image area. Toolbars are not counted.
 -   Only windows created without cv::WINDOW_AUTOSIZE flag can be resized.
@@ -477,7 +477,7 @@ left scrolling, respectively.
 
 With the C API, the macro CV_GET_WHEEL_DELTA(flags) can be used alternatively.
 
-@note
+@note placeholder
 
 Mouse-wheel events are currently supported only on Windows.
 
@@ -530,7 +530,7 @@ and range, assigns a variable value to be a position synchronized with the track
 the callback function onChange to be called on the trackbar position change. The created trackbar is
 displayed in the specified window winname.
 
-@note
+@note placeholder
 
 [__Qt Backend Only__] winname can be empty (or NULL) if the trackbar should be attached to the
 control panel.
@@ -558,7 +558,7 @@ CV_EXPORTS int createTrackbar(const String& trackbarname, const String& winname,
 
 The function returns the current position of the specified trackbar.
 
-@note
+@note placeholder
 
 [__Qt Backend Only__] winname can be empty (or NULL) if the trackbar is attached to the control
 panel.
@@ -572,7 +572,7 @@ CV_EXPORTS_W int getTrackbarPos(const String& trackbarname, const String& winnam
 
 The function sets the position of the specified trackbar in the specified window.
 
-@note
+@note placeholder
 
 [__Qt Backend Only__] winname can be empty (or NULL) if the trackbar is attached to the control
 panel.
@@ -587,7 +587,7 @@ CV_EXPORTS_W void setTrackbarPos(const String& trackbarname, const String& winna
 
 The function sets the maximum position of the specified trackbar in the specified window.
 
-@note
+@note placeholder
 
 [__Qt Backend Only__] winname can be empty (or NULL) if the trackbar is attached to the control
 panel.
@@ -602,7 +602,7 @@ CV_EXPORTS_W void setTrackbarMax(const String& trackbarname, const String& winna
 
 The function sets the minimum position of the specified trackbar in the specified window.
 
-@note
+@note placeholder
 
 [__Qt Backend Only__] winname can be empty (or NULL) if the trackbar is attached to the control
 panel.

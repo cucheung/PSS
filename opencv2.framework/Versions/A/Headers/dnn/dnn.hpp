@@ -212,13 +212,13 @@ CV__DNN_INLINE_NS_BEGIN
          */
         void forward_fallback(InputArrayOfArrays inputs, OutputArrayOfArrays outputs, OutputArrayOfArrays internals);
 
-        /** @brief
+        /** @brief placeholder
          * @overload
          * @deprecated Use Layer::finalize(InputArrayOfArrays, OutputArrayOfArrays) instead
          */
         CV_DEPRECATED void finalize(const std::vector<Mat> &inputs, CV_OUT std::vector<Mat> &outputs);
 
-        /** @brief
+        /** @brief placeholder
          * @overload
          * @deprecated Use Layer::finalize(InputArrayOfArrays, OutputArrayOfArrays) instead
          */

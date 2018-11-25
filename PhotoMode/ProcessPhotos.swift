@@ -18,6 +18,7 @@
 //  10/27/2018 - Fixed Photo Display issue (was not displaying the captured photos but rather the previous 6 photos)
 //  10/29/2018 - Increased sleep timer to 3 seconds after pressing Save button to allow Delete Notification to appear first
 //  11/22/2018 - Added Input/Output Comments to Code
+//  11/24/2018 - Fixed Warnings in code
 
 import Photos
 
@@ -180,17 +181,14 @@ class ProcessPhotos: UIViewController {
         let fetchResult: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         
         // Find corresponding photo to delete via index
-        if (fetchResult.object(at: index) != nil) {
-            var lastAsset: PHAsset = fetchResult.object(at: index) as! PHAsset
-            let arrayToDelete = NSArray(object: lastAsset)
-            
-            // Perform delete operation
-            PHPhotoLibrary.shared().performChanges( {
-                PHAssetChangeRequest.deleteAssets(arrayToDelete)},
-                                                    completionHandler: {
-                                                        success, error in
+        let lastAsset: PHAsset = fetchResult.object(at: index) 
+        let arrayToDelete = NSArray(object: lastAsset)
+        // Perform delete operation
+        PHPhotoLibrary.shared().performChanges( {
+            PHAssetChangeRequest.deleteAssets(arrayToDelete)},
+                completionHandler: {
+                success, error in
             })
-        }
     }
     
     

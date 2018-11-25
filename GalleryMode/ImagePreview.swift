@@ -20,6 +20,7 @@
 //  10/27/2018 - Added Firebase Upload Alerts, Changed passedContentOffset -> imgOffset, Modified cell.imgView.image to pass correct image offset
 //  11/19/2018 - Fixed Delete Photo Issue where deleted photo still appears in view by notifying observer in GalleryMode.swift that Delete action wa performed
 //  11/23/2018 - Added Input/Output comments
+//  11/24/2018 - Fixed Warnings in code
 
 import UIKit
 import FirebaseStorage // CMPT 275 - Import Firebase library
@@ -228,7 +229,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     // Output: present() Share Menu
     @objc func shareOnlyImage() {
         let imageShare =  [imgIndex]
-        let activityViewController = UIActivityViewController(activityItems: imageShare , applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: imageShare as [Any] , applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
     }
@@ -250,22 +251,20 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         // Find corresponding photo to delete via index
         let rowNumber : Int = imgOffset
-        if (fetchResult.object(at: rowNumber) != nil) {
-            var lastAsset: PHAsset = fetchResult.object(at: rowNumber) as! PHAsset
-            let arrayToDelete = NSArray(object: lastAsset)
+        let lastAsset: PHAsset = fetchResult.object(at: rowNumber) 
+        let arrayToDelete = NSArray(object: lastAsset)
             
-            // Perform delete operation
-            PHPhotoLibrary.shared().performChanges( {
-                PHAssetChangeRequest.deleteAssets(arrayToDelete)},
-                    completionHandler: {
-                    success, error in
-                        // CMPT275 - Refresh View by notifying GalleryMode.swift if "Delete" button was pressed
-                        if success == true
-                        {
-                            NotificationCenter.default.post(name: NSNotification.Name("load"), object: nil)
-                        }
+        // Perform delete operation
+        PHPhotoLibrary.shared().performChanges( {
+            PHAssetChangeRequest.deleteAssets(arrayToDelete)},
+                completionHandler: {
+                success, error in
+                    // CMPT275 - Refresh View by notifying GalleryMode.swift if "Delete" button was pressed
+                    if success == true
+                    {
+                        NotificationCenter.default.post(name: NSNotification.Name("load"), object: nil)
+                    }
             })
-        }
         dismiss(animated: true, completion: nil)
     }
 }
