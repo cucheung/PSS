@@ -45,9 +45,11 @@
                                             <action selector="switchCameras:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s10-Jq-2sE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ar-wD-sPC">
-                                        <rect key="frame" x="4" y="0.0" width="63" height="47"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ar-wD-sPC">
+                                        <rect key="frame" x="19" y="23" width="63" height="47"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="63" id="uuA-X3-hAS"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                         <state key="normal" title="Back">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -56,8 +58,8 @@
                                             <segue destination="5Bf-qr-bEQ" kind="show" id="kJW-3h-wUx"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OER-Eo-TZy">
-                                        <rect key="frame" x="272" y="107" width="103" height="42"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OER-Eo-TZy">
+                                        <rect key="frame" x="273" y="126" width="103" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="MtE-9C-uL9"/>
                                             <constraint firstAttribute="width" constant="103" id="wzD-zo-Lv6"/>
@@ -73,12 +75,16 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="6ar-wD-sPC" firstAttribute="leading" secondItem="Lnd-7g-U5f" secondAttribute="leading" constant="19" id="73r-IQ-vXk"/>
                                     <constraint firstAttribute="trailing" secondItem="dNR-Vo-zfA" secondAttribute="trailing" constant="16" id="EjQ-lm-I0V"/>
-                                    <constraint firstItem="OER-Eo-TZy" firstAttribute="top" secondItem="dNR-Vo-zfA" secondAttribute="bottom" constant="8" id="RHP-0Z-wc1"/>
                                     <constraint firstItem="dNR-Vo-zfA" firstAttribute="top" secondItem="TK7-Oc-3y1" secondAttribute="bottom" id="RPo-BF-zn6"/>
+                                    <constraint firstAttribute="bottom" secondItem="OER-Eo-TZy" secondAttribute="bottom" constant="499" id="TZd-8u-gqV"/>
                                     <constraint firstItem="TK7-Oc-3y1" firstAttribute="top" secondItem="Lnd-7g-U5f" secondAttribute="top" constant="16" id="Ush-vW-6Qx"/>
-                                    <constraint firstAttribute="trailing" secondItem="OER-Eo-TZy" secondAttribute="trailing" constant="16" id="i8r-C4-BdV"/>
+                                    <constraint firstAttribute="bottom" secondItem="6ar-wD-sPC" secondAttribute="bottom" constant="597" id="dEl-Au-Acp"/>
+                                    <constraint firstItem="OER-Eo-TZy" firstAttribute="leading" secondItem="Lnd-7g-U5f" secondAttribute="leading" constant="273" id="del-ug-MxR"/>
+                                    <constraint firstItem="6ar-wD-sPC" firstAttribute="top" secondItem="Lnd-7g-U5f" secondAttribute="top" constant="23" id="saL-eV-tGN"/>
                                     <constraint firstAttribute="trailing" secondItem="TK7-Oc-3y1" secondAttribute="trailing" constant="16" id="tqP-Ux-GM9"/>
+                                    <constraint firstItem="OER-Eo-TZy" firstAttribute="top" secondItem="dNR-Vo-zfA" secondAttribute="bottom" constant="22" id="vi0-Kr-iTX"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Akr-g7-ggC">
@@ -106,6 +112,7 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="BackButton" destination="6ar-wD-sPC" id="ntk-tb-UKn"/>
                         <outlet property="HVAA_Button" destination="OER-Eo-TZy" id="QEF-hR-rIR"/>
                         <outlet property="captureButton" destination="Akr-g7-ggC" id="ZHd-4Q-aGF"/>
                         <outlet property="capturePreviewView" destination="Lnd-7g-U5f" id="1h1-9E-VM0"/>

@@ -23,6 +23,7 @@
 //  11/22/2018 - Added Input/Output Comments to Code
 //  11/24/2018 - Fixed Warnings in code
 //  11/24/2018 - Added Landscape support for Viewfinder
+//  11/25/2018 - Fixed Viewfinder issue (Issue #5)
 
 
 import UIKit
@@ -48,6 +49,7 @@ class ViewController: UIViewController {
     @IBOutlet fileprivate var toggleCameraButton: UIButton!
     @IBOutlet fileprivate var toggleFlashButton: UIButton!
     @IBOutlet weak var HVAA_Button: UIButton!
+    @IBOutlet weak var BackButton: UIButton!
     
     let cameraController = CameraController()
     
@@ -85,15 +87,6 @@ class ViewController: UIViewController {
             })
         }
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        // Source: https://stackoverflow.com/a/44529434/10498067
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.shouldRotate = false
-        // Source: https://stackoverflow.com/a/50720458/10498067
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
-        
-    }
 }
 
 extension ViewController {
@@ -101,8 +94,8 @@ extension ViewController {
     // Configure Camera Controller
     // Input/Output: NULL
     override func viewDidLoad() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.shouldRotate = true
+        // Observer to detect orientation change of Device to rotate icons
+        NotificationCenter.default.addObserver(self, selector: #selector(rotate), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         // Setup Camera Viewfinder Preview
         func configureCameraController() {
             cameraController.prepare {(error) in
@@ -126,6 +119,62 @@ extension ViewController {
         styleCaptureButton()
         configureCameraController()
     
+    }
+    // Source: https://gist.github.com/halgatewood/0f77604d41a457ae0ec208ae6cccb220
+    // Rotate buttons when device orientation is rotated
+    @objc func rotate()
+    {
+        var rotation_angle: CGFloat = 0
+        
+        switch UIDevice.current.orientation
+        {
+        case .landscapeLeft:
+            rotation_angle = (CGFloat(Double.pi) / 2)
+        case .landscapeRight:
+            rotation_angle = (CGFloat(-Double.pi) / 2)
+        case .portraitUpsideDown:
+            rotation_angle = CGFloat(Double.pi)
+        case .unknown, .portrait, .faceUp, .faceDown:
+            rotation_angle = 0
+        }
+        
+        UIView.animate(withDuration: 0.2, animations:
+            {
+                // CMPT275 - Rotate buttons on screen
+                self.HVAA_Button.transform = CGAffineTransform(rotationAngle: rotation_angle);
+                self.captureButton.transform = CGAffineTransform(rotationAngle: rotation_angle);
+                self.toggleCameraButton.transform = CGAffineTransform(rotationAngle: rotation_angle);
+                self.toggleFlashButton.transform = CGAffineTransform(rotationAngle: rotation_angle);
+                self.BackButton.transform = CGAffineTransform(rotationAngle: rotation_angle);
+                
+        }, completion: nil)
+    }
+}
+
+extension UIImage {
+    // Source: https://stackoverflow.com/a/47402811/10498067
+    // Input: UIImage
+    // Output: rotated UIImage based on radian value
+    func rotate(radians: Float) -> UIImage? {
+        var newSize = CGRect(origin: CGPoint.zero, size: self.size).applying(CGAffineTransform(rotationAngle: CGFloat(radians))).size
+        // Trim off the extremely small float value to prevent core graphics from rounding it up
+        newSize.width = floor(newSize.width)
+        newSize.height = floor(newSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, true, self.scale)
+        let context = UIGraphicsGetCurrentContext()!
+        
+        // Move origin to middle
+        context.translateBy(x: newSize.width/2, y: newSize.height/2)
+        // Rotate around middle
+        context.rotate(by: CGFloat(radians))
+        // Draw the image at its center
+        self.draw(in: CGRect(x: -self.size.width/2, y: -self.size.height/2, width: self.size.width, height: self.size.height))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
 }
 
@@ -204,6 +253,19 @@ extension ViewController {
     @IBAction func captureImage(_ sender: UIButton) {
         // CMPT 275 - Disable button after single button
         captureButton.isEnabled = false
+        // Determine Orientation of device to correctly save photo in landscape/portrait mode:
+        var rotation_angle: Float = 0
+        switch UIDevice.current.orientation
+        {
+        case .landscapeLeft:
+            rotation_angle = (Float(Double.pi) / 2)
+        case .landscapeRight:
+            rotation_angle = (Float(-Double.pi) / 2)
+        case .portraitUpsideDown:
+            rotation_angle = Float(Double.pi)
+        case .unknown, .portrait, .faceUp, .faceDown:
+            rotation_angle = 0
+        }
         // Check if HVAA flag is enabled
         if (cameraController.HVAA == false)
         {
@@ -212,8 +274,9 @@ extension ViewController {
                     print(error ?? "Image capture error")
                     return
                 }
+                let image_rotated = image.rotate(radians: rotation_angle) // Rotate 90 degrees
                 PHPhotoLibrary.shared().performChanges({
-                    PHAssetChangeRequest.creationRequestForAsset(from: image)
+                    PHAssetChangeRequest.creationRequestForAsset(from: image_rotated!)
                 }, completionHandler: { success, error in
                     if success {
                         NSLog("Saved Photo")
@@ -248,8 +311,9 @@ extension ViewController {
                         print(error ?? "Image capture error")
                         return
                     }
+                    let image_rotated = image.rotate(radians: rotation_angle) // Rotate 90 degrees
                     PHPhotoLibrary.shared().performChanges({
-                        PHAssetChangeRequest.creationRequestForAsset(from: image)
+                        PHAssetChangeRequest.creationRequestForAsset(from: image_rotated!)
                     }, completionHandler: { success, error in
                         if success {
                             NSLog("Saved Photo")
