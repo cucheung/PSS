@@ -116,7 +116,7 @@ class ProcessPhotos: UIViewController {
         Image_4.image = sorted_images[3]
         Image_5.image = sorted_images[4]
         Image_6.image = sorted_images[5]
-        let alertController = UIAlertController(title: "Instructions", message: "Photo Mode 2 Instructions", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Instructions", message: "Best Photo: Located on Top Left of screen\nTo Delete Photos: Select the slider located below the image you would like to Delete\n Save: Delete selected photos", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alertController, animated: true, completion: nil)
         

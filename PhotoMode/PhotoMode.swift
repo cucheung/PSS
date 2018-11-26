@@ -64,7 +64,7 @@ class ViewController: UIViewController {
         // CMPT 275 - Photo Mode Instructions Alert
         if (cameraDetected == true)
         {
-            let alertController = UIAlertController(title: "Instructions", message: "Photo Mode Instructions", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Instructions", message: "Capture Button (bottom): Captures 6 photos\nFlash button (Lightning Bolt): Turn On/Off Flash\nSwitch Camera: Switch between Front/Rear Camera\nHVAA Button: Turn On/Off Horizontal Alignment Assistance", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             present(alertController, animated: true, completion: nil)
         }
@@ -101,8 +101,8 @@ extension ViewController {
             cameraController.prepare {(error) in
                 if let error = error {
                     print(error)
-                    cameraDetected = false;
-                    self.dismiss(animated: true)
+                    //cameraDetected = false;
+                    //self.dismiss(animated: true)
                 }
                 try? self.cameraController.displayPreview(on: self.capturePreviewView)
             }
