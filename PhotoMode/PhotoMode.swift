@@ -258,9 +258,9 @@ extension ViewController {
         switch UIDevice.current.orientation
         {
         case .landscapeLeft:
-            rotation_angle = (Float(Double.pi) / 2)
-        case .landscapeRight:
             rotation_angle = (Float(-Double.pi) / 2)
+        case .landscapeRight:
+            rotation_angle = (Float(Double.pi) / 2)
         case .portraitUpsideDown:
             rotation_angle = Float(Double.pi)
         case .unknown, .portrait, .faceUp, .faceDown:
