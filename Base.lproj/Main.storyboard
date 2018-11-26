@@ -147,10 +147,10 @@
             </objects>
             <point key="canvasLocation" x="150" y="-568"/>
         </scene>
-        <!--View Controller-->
+        <!--Main Menu-->
         <scene sceneID="4Ky-CD-0oH">
             <objects>
-                <viewController id="5Bf-qr-bEQ" sceneMemberID="viewController">
+                <viewController id="5Bf-qr-bEQ" customClass="MainMenu" customModule="PSS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sc5-Yx-tad">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -183,10 +183,22 @@
                                 <rect key="frame" x="59" y="44" width="256" height="134"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ks0-86-isd">
+                                <rect key="frame" x="269" y="20" width="90" height="85"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="Tutorial"/>
+                                <connections>
+                                    <action selector="VideoPlayer:" destination="5Bf-qr-bEQ" eventType="touchUpInside" id="8j3-2J-UBX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="i1W-hL-RbB"/>
                     </view>
+                    <connections>
+                        <outlet property="VideoPlayer" destination="ks0-86-isd" id="KuG-Kc-HJZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZV-w6-cw1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
