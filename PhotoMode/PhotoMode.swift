@@ -1,5 +1,5 @@
 //  ViewController.swift
-//  Source used: https://github.com/appcoda/FullScreenCamera
+//  Sources used: https://github.com/appcoda/FullScreenCamera, https://gist.github.com/halgatewood/0f77604d41a457ae0ec208ae6cccb220 (Rotate Button), https://stackoverflow.com/a/47402811/10498067 (Rotate UIImage)
 
 //  Description: Camera Controller for Photo Mode
 //  This file sets up the UI buttons for Photo Mode
@@ -120,7 +120,6 @@ extension ViewController {
         configureCameraController()
     
     }
-    // Source: https://gist.github.com/halgatewood/0f77604d41a457ae0ec208ae6cccb220
     // Rotate buttons when device orientation is rotated
     @objc func rotate()
     {
@@ -152,7 +151,6 @@ extension ViewController {
 }
 
 extension UIImage {
-    // Source: https://stackoverflow.com/a/47402811/10498067
     // Input: UIImage
     // Output: rotated UIImage based on radian value
     func rotate(radians: Float) -> UIImage? {

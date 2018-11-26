@@ -1,5 +1,5 @@
 //  FirebaseGallery.swift
-//  Source used: https://github.com/Akhilendra/photosAppiOS
+//  Source used: https://github.com/Akhilendra/photosAppiOS, https://stackoverflow.com/a/27342233/10498067 (load Firebase images)
 
 //  Description: Firebase Gallery Mode - This file handles fetching the images uploaded to Firebases
 
@@ -58,8 +58,6 @@ class FirebaseGallery: UIViewController, UICollectionViewDelegate, UICollectionV
         
         FirebaseCollectionView.autoresizingMask = UIViewAutoresizing(rawValue: UIViewAutoresizing.RawValue(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
         
-        
-        // Source: https://stackoverflow.com/a/27342233/10498067
         // Load Images from Firebase Database and store to FirebaseimageArray
         let ref = Database.database().reference().child("backup")
         ref.observeSingleEvent(of: .value, with: { snapshot in
