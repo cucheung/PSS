@@ -19,6 +19,7 @@
 //  10/29/2018 - Increased sleep timer to 3 seconds after pressing Save button to allow Delete Notification to appear first
 //  11/22/2018 - Added Input/Output Comments to Code
 //  11/24/2018 - Fixed Warnings in code
+//  11/27/2018 - Fixed Sorted Index when deleting photos
 
 import Photos
 
@@ -30,6 +31,7 @@ class ProcessPhotos: UIViewController {
     var sorted_images:[UIImage] = []
     // Array to hold blur values for each photo
     var result:[Double] = []
+    var sorted_index:[Int] = []
     
     // UI Declarations (Image Views / Buttons)
     @IBOutlet var Image_1: UIImageView!
@@ -99,6 +101,10 @@ class ProcessPhotos: UIViewController {
         result.append(result_test.isImageBlurry(images[4]))
         result.append(result_test.isImageBlurry(images[5]))
         
+        // Obtain sorted index
+        let sorted = result.enumerated().sorted(by: {$0.element > $1.element})
+        sorted_index = sorted.map{$0.offset}
+        
         // Order Photos by Clarity (Most Clear -> Least Clear)
         for _ in 0...5
         {
@@ -156,7 +162,7 @@ class ProcessPhotos: UIViewController {
         for index in 0...5 {
             if (Switch_arr[index] == true)
             {
-                deleteImage(index: index)
+                deleteImage(index: sorted_index[index])
             }
         }
         // Sleep for 3 seconds to wait for initial delete prompt to appear

@@ -9,6 +9,14 @@
          contextName = "closure #1 in FirebaseGallery.grabPhotos():FirebaseGallery.swift">
       </ContextState>
       <ContextState
+         contextName = "ProcessPhotos.viewDidAppear(_:):ProcessPhotos.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sorted_index">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "FirebaseGallery.grabPhotos():FirebaseGallery.swift">
          <PersistentStrings>
             <PersistentString
