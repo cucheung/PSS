@@ -43,7 +43,7 @@ class CameraController: NSObject {
     var photoCaptureCompletionBlock: ((UIImage?, Error?) -> Void)?
     
     // CMPT275 - HVAA
-    var HVAA = false;
+    var HVAA = false
 }
 
 // Camera Controller Extension

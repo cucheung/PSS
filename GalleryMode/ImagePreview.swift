@@ -113,7 +113,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         myCollectionView.dataSource=self
         myCollectionView.register(ImagePreviewFullViewCell.self, forCellWithReuseIdentifier: "Cell")
         // CMPT275 - Added isScrollEnabled
-        myCollectionView.isScrollEnabled = false;
+        myCollectionView.isScrollEnabled = false
     
         self.view.addSubview(myCollectionView)
         
@@ -141,7 +141,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         // CMPT 275 - Preview image
         let rowNumber : Int = imgOffset
         cell.imgView.image=imgArray[rowNumber]
-        imgIndex = imgArray[rowNumber];
+        imgIndex = imgArray[rowNumber]
         return cell
     }
     
@@ -210,7 +210,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
                 let alertController = UIAlertController(title: "Upload Complete!", message: "Photo was uploaded successfully", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
-                success = true;
+                success = true
             }
         }
         // Wait for 10 seconds and check whether upload has completed

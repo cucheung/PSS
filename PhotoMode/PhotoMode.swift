@@ -30,9 +30,9 @@ import UIKit
 import Photos
 import CoreMotion
 
-var cameraDetected = true; 
-var pictureTaken = false;
-var HVAA_test = false;
+var cameraDetected = true
+var pictureTaken = false
+var HVAA_test = false
 var x_accel: Double!
 var y_accel: Double!
 
@@ -101,7 +101,7 @@ extension ViewController {
             cameraController.prepare {(error) in
                 if let error = error {
                     print(error)
-                    cameraDetected = false;
+                    cameraDetected = false
                     self.dismiss(animated: true)
                 }
                 try? self.cameraController.displayPreview(on: self.capturePreviewView)
@@ -140,11 +140,11 @@ extension ViewController {
         UIView.animate(withDuration: 0.2, animations:
             {
                 // CMPT275 - Rotate buttons on screen
-                self.HVAA_Button.transform = CGAffineTransform(rotationAngle: rotation_angle);
-                self.captureButton.transform = CGAffineTransform(rotationAngle: rotation_angle);
-                self.toggleCameraButton.transform = CGAffineTransform(rotationAngle: rotation_angle);
-                self.toggleFlashButton.transform = CGAffineTransform(rotationAngle: rotation_angle);
-                self.BackButton.transform = CGAffineTransform(rotationAngle: rotation_angle);
+                self.HVAA_Button.transform = CGAffineTransform(rotationAngle: rotation_angle)
+                self.captureButton.transform = CGAffineTransform(rotationAngle: rotation_angle)
+                self.toggleCameraButton.transform = CGAffineTransform(rotationAngle: rotation_angle)
+                self.toggleFlashButton.transform = CGAffineTransform(rotationAngle: rotation_angle)
+                self.BackButton.transform = CGAffineTransform(rotationAngle: rotation_angle)
                 
         }, completion: nil)
     }
@@ -237,8 +237,8 @@ extension ViewController {
         self.motion.accelerometerUpdateInterval = 0.5
         self.motion.startAccelerometerUpdates()
         sleep(1)
-        x_accel = self.motion.accelerometerData?.acceleration.x;
-        y_accel = self.motion.accelerometerData?.acceleration.y;
+        x_accel = self.motion.accelerometerData?.acceleration.x
+        y_accel = self.motion.accelerometerData?.acceleration.y
         self.motion.stopAccelerometerUpdates()
         let xy_data = [x_accel,y_accel]
         return xy_data
@@ -286,7 +286,7 @@ extension ViewController {
             // CMPT275 - Present Process Photos View Controller after capturing photos
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "processphotos")
             self.present(viewController!, animated: true)
-            captureButton.isEnabled = true;
+            captureButton.isEnabled = true
         }
         // Perform HVAA Analysis if HVAA is enabled
         else
@@ -298,7 +298,7 @@ extension ViewController {
                 if (abs(result[0]!) < 0.08 || abs(result[1]!) < 0.08)
                 {
                     HVAA_test = true
-                    break;
+                    break
                 }
             }
             // Check whether HVAA passed
@@ -324,14 +324,14 @@ extension ViewController {
                 let viewController = self.storyboard?.instantiateViewController(withIdentifier: "processphotos")
                 self.present(viewController!, animated: true)
                 HVAA_test = false // Reset Flag
-                captureButton.isEnabled = true;
+                captureButton.isEnabled = true
             }
             else
             {
                 let alertController = UIAlertController(title: "Error", message: "HVAA Failed. Please Try Again", preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 present(alertController, animated: true, completion: nil)
-                captureButton.isEnabled = true;
+                captureButton.isEnabled = true
             }
         }
 

@@ -94,7 +94,7 @@ class FirebaseImagePreviewVC: UIViewController, UICollectionViewDelegate, UIColl
         myCollectionView.dataSource=self
         myCollectionView.register(FirebaseImagePreviewFullViewCell.self, forCellWithReuseIdentifier: "Cell")
         // CMPT275 - Added isScrollEnabled
-        myCollectionView.isScrollEnabled = false;
+        myCollectionView.isScrollEnabled = false
     
         self.view.addSubview(myCollectionView)
         
@@ -121,7 +121,7 @@ class FirebaseImagePreviewVC: UIViewController, UICollectionViewDelegate, UIColl
         // CMPT 275 - Preview image
         let rowNumber : Int = imgOffset
         cell.imgView.image=imgArray[rowNumber]
-        imgIndex = imgArray[rowNumber];
+        imgIndex = imgArray[rowNumber]
         return cell
     }
     
