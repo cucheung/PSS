@@ -16,6 +16,7 @@
 //  11/17/2018 - Fixed photo load on 2nd run when Photo Access is already granted
 //  11/17/2018 - Initial PhotoEditorSDK Implementation
 //  11/23/2018 - Added Input/Output comments for appropiate functions
+//  11/28/2018 - Refresh Gallery View after a user saves an edited photo to edit the editted photo (if required)
 
 import UIKit
 import Photos
@@ -35,6 +36,7 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 NSLog("Failed Saving Photo")
             }
         })
+        NotificationCenter.default.post(name: NSNotification.Name("loadEditor"), object: nil)
         dismiss(animated: true, completion: nil)
     }
     
@@ -55,6 +57,9 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // CMPT275 - Add Observer to detect whether photo is deleted in ImagePreview.swift
+        NotificationCenter.default.addObserver(self, selector: #selector(loadEditorList(notification:)), name: NSNotification.Name(rawValue: "loadEditor"), object: nil)
         
         // CMPT275 - Back button
         let backButton: UIButton = {
@@ -224,6 +229,10 @@ class Editor: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         dismiss(animated: true)
     }
     
+    // CMPT275 - Reload Gallery View after when observer is signaled (after deleting photo or after downloading images from Firebase)
+    @objc func loadEditorList(notification: NSNotification) {
+        grabPhotos()
+    }
     
     // Obtain photos stored in Storage and store to imageArray
     func grabPhotos(){
