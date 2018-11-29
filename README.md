@@ -4,19 +4,19 @@ Parkinson’s Shutter System (PSS) is an iOS camera application designed to help
 As an affliction of the nervous system, PD causes tremors and loss of dexterity in its patients. The main goal of PSS is to improve camera ease of use for PD patients by offering an all-in-one replacement for taking, editing, viewing and sharing photos.
 
 ## Features:
-Photo Mode:
-Captures 6 Photos and performs post-processing using OpenCV Lapacian Filter to select the best photo
-Camera Settings: Flash / Camera Selection / HVAA (Horizontal/Vertical Alignment Assistance - To capture photo when device is aligned relatively portrait / landscape)
-Sorts captured images based on clarity and allows user to select desired photos to save/delete
+#### Photo Mode:
+* Captures 6 Photos and performs post-processing using OpenCV Lapacian Filter to select the best photo
+* Camera Settings: Flash / Camera Selection / HVAA (Horizontal/Vertical Alignment Assistance - To capture photo when device is aligned relatively portrait / landscape)
+* Sorts captured images based on clarity and allows user to select desired photos to save/delete
 
-Gallery Mode:
-Ability to view last 50 photos saved on the device
-Ability to Share / Delete / Backup (to Google Firebase) photo
-Ability to view uploaded photos to Firebase and donwload them onto Device
+#### Gallery Mode:
+* Ability to view last 50 photos saved on the device
+* Ability to Share / Delete / Backup (to Google Firebase) photo
+* Ability to view uploaded photos to Firebase and donwload them onto Device
 
-Gallery Mode:
-Uses PhotoEditorSDK
-Crop/Rotate/Filter/Levels adjustment
+#### Editor Mode:
+* Uses PhotoEditorSDK
+* Crop/Rotate/Filter/Levels adjustment
 
 ## Releases:
 
