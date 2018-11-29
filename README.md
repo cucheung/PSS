@@ -22,7 +22,9 @@ As an affliction of the nervous system, PD causes tremors and loss of dexterity 
 
 To download one of our releases, visit our release tab and download the 2018-3-CMPT275-Group-03_src.zip: https://github.com/cucheung/PSS/releases
 
-## Cloning Repository from GitHub
+## Developer Section:
+
+### Cloning Repository from GitHub
 
 1. Make sure Git LFS is installed: https://git-lfs.github.com 
 2. Enter the following command in Terminal to clone the repository:
@@ -30,18 +32,27 @@ To download one of our releases, visit our release tab and download the 2018-3-C
 git lfs clone https://github.com/cucheung/PSS.git 
 ```
 
-## Running PSS in Simulator
+### Running PSS in Simulator
 
 To run the Code in Simulator, select iPhone 8 and press the Play button (screenshot below):
 
 ![PSS Schema](https://i.imgur.com/FM6FdXg.png)
 
-## Dependencies 
+### Running Test Cases in Simulator
+
+To run test cases in Simulator, select iPhone 8 and press the circular white play button located beside the test suite:
+
+iPhone_UITest: Only suitable for physical iPhone device
+Simulator_UITest: Only suitable for running in Simulator
+
+![PSS Schema](https://i.imgur.com/tqvRLsE.png)
+
+### Dependencies 
 
 Pods Framework: Google Firebase (Google Utiliites/GTMSessionFetcher/nanopb/leveldb-library), PhotoEditor SDK
 
 
-### Sources used:
+#### Sources used:
 Gallery Mode Tile Preview (Modified with ability to preview any photo on grid): https://github.com/Akhilendra/photosAppiOS
 
 Photo Capture functionality: https://github.com/appcoda/FullScreenCamera
