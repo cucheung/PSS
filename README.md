@@ -43,9 +43,15 @@ Pods Framework: Google Firebase (Google Utiliites/GTMSessionFetcher/nanopb/level
 
 ### Sources used:
 Gallery Mode Tile Preview (Modified with ability to preview any photo on grid): https://github.com/Akhilendra/photosAppiOS
+
 Photo Capture functionality: https://github.com/appcoda/FullScreenCamera
+
 OpenCV Blur Detection Algorithm (Laplace): https://stackoverflow.com/a/40589477/10498067
+
 Fetching Photos for ProcessPhotos: https://stackoverflow.com/questions/28259961/swift-how-to-get-last-taken-3-photos-from-photo-library 
+
 Delete Photo Functionality: https://stackoverflow.com/questions/29466866/how-to-delete-the-last-photo-in-swift-ios8 
+
 Share Functionality: https://stackoverflow.com/a/49192691/10498067
+
 Iterrating over Firebase DB (to show Firebase Gallery): https://stackoverflow.com/a/27342233/10498067
