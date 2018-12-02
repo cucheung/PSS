@@ -1,3 +1,4 @@
 opencv2.framework/Versions/A/opencv2 filter=lfs diff=lfs merge=lfs -text
 Pods/PhotoEditorSDK/PhotoEditorSDK/PhotoEditorSDK.framework/PhotoEditorSDK filter=lfs diff=lfs merge=lfs -text
 Pods/PhotoEditorSDK/PhotoEditorSDK/PhotoEditorSDK.framework.dsym/Contents/Resources/DWARF/PhotoEditorSDK filter=lfs diff=lfs merge=lfs -text
+tutorial.mp4 filter=lfs diff=lfs merge=lfs -text
