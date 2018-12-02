@@ -1,5 +1,18 @@
 # Parkinsons Shutter System (PSS) [![Build Status](https://travis-ci.org/cucheung/PSS.svg?branch=master)](https://travis-ci.org/cucheung/PSS)
 
+CMPT 275 (Software Engineering) Fall 2018 Project
+
+## Group Members:
+**Swift Code:** Curtis Cheung (curtis_cheung@sfu.ca)
+
+**UI/UX Design:** Ben Ngosa (mubanga_ngosa@sfu.ca)
+
+**UI Test Case:** David Ling (dla150@sfu.ca)
+
+**Documentation:** Tyler Johnson (ttjohnso@sfu.ca), Cara Hu (tha77@sfu.ca), Adi Sinha (ananyays@sfu.ca)
+
+**Project Website (contains Documentation, Assignments and Meeting Minutes):** https://sites.google.com/view/cmpt-275-fall-2018-group-3/home
+
 Parkinson’s Shutter System (PSS) is an iOS camera application designed to help Parkinson’s Disease (PD) patients take photographs. The application targets iOS 11 and is intended for iPhone 6, 6s, 7, and 8. 
 As an affliction of the nervous system, PD causes tremors and loss of dexterity in its patients. The main goal of PSS is to improve camera ease of use for PD patients by offering an all-in-one replacement for taking, editing, viewing and sharing photos.
 
